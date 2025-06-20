@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Liderazgo Tóxico - Descubre tu Nivel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .test-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .progress-bar {
+            background: #f0f0f0;
+            height: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+        }
+        
+        .question h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .options {
+            list-style: none;
+        }
+        
+        .options li {
+            margin-bottom: 10px;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .options label {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            display: block;
+        }
+        
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .email-capture {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .email-form {
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        
+        .email-form input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+        
+        .results {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .result-score {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .result-level {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .nivel-verde { background: #d4edda; color: #155724; }
+        .nivel-amarillo { background: #fff3cd; color: #856404; }
+        .nivel-naranja { background: #f8d7da; color: #721c24; }
+        .nivel-rojo { background: #f5c6cb; color: #721c24; }
+        
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 20px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 15px;
+            font-weight: bold;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .email-form input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .email-form input:focus {
+            outline: none;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+            border: 2px solid #ff6b6b;
+        }
+        
+        .results-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 18px 30px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            font-weight: bold;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            animation: pulse 2s infinite;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .results-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
+            animation: none;
+        }
+        
+        .results-button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            animation: none;
+            box-shadow: none;
+            transform: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🎯 Test de Liderazgo Tóxico</h1>
+            <p>Descubre tu nivel de toxicidad en 20 preguntas<br>
+            <strong>Resultados instantáneos y plan de acción personalizado</strong></p>
+        </div>
+
+        <!-- TEST SECTION -->
+        <div id="test-section">
+            <div class="test-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                
+                <p style="text-align: center; margin-bottom: 30px;">
+                    Pregunta <span id="current-question">1</span> de <span id="total-questions">20</span>
+                </p>
+                
+                <div id="question-container">
+                    <!-- Las preguntas se cargarán aquí -->
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button id="prev-btn" onclick="previousQuestion()" class="btn" style="display: none;">
+                        ← Anterior
+                    </button>
+                    <button id="next-btn" onclick="nextQuestion()" class="btn btn-success">
+                        Siguiente →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMAIL CAPTURE SECTION -->
+        <div id="email-capture-section" class="hidden">
+            <div class="test-container">
+                <div class="email-capture">
+                    <h2>🎉 ¡Test Completado!</h2>
+                    <p style="font-size: 1.2em; margin: 20px 0;">
+                        Tus resultados están listos. Ingresa tu email para ver tu análisis personalizado
+                        y recibir tu plan de acción gratuito.
+                    </p>
+                    
+                    <form class="email-form" onsubmit="showResults(event)">
+                        <input 
+                            type="text" 
+                            id="result-name" 
+                            placeholder="Tu nombre"
+                            required
+                            oninput="checkFormComplete()"
+                        >
+                        <input 
+                            type="email" 
+                            id="result-email" 
+                            placeholder="tu.email@empresa.com"
+                            required
+                            oninput="checkFormComplete()"
+                        >
+                        <button type="submit" id="results-button" class="results-button">
+                            🚀 VER MIS RESULTADOS AHORA
+                        </button>
+                    </form>
+                    
+                    <div style="margin-top: 20px; font-size: 0.9em; opacity: 0.9;">
+                        🔒 100% confidencial • ❌ Sin spam • 📊 Resultados inmediatos
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS SECTION -->
+        <div id="results-section" class="hidden">
+            <div class="test-container">
+                <div class="results">
+                    <h2>📊 TUS RESULTADOS</h2>
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 10px; margin-bottom: 25px;">
+                        <p style="color: #27ae60; font-weight: bold;">✅ Resultados enviados a: <span id="user-email-display"></span></p>
+                    </div>
+                    
+                    <div class="result-score" id="final-score"></div>
+                    <div class="result-level" id="result-level"></div>
+                    <div id="result-description"></div>
+                    
+                    <div style="margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 15px;">
+                        <h3 style="color: #e74c3c; margin-bottom: 20px;">🚀 ¿Quieres la transformación completa?</h3>
+                        <p style="margin-bottom: 20px;">Este test te da una vista general. Para una transformación real necesitas:</p>
+                        <ul style="text-align: left; max-width: 400px; margin: 0 auto 20px;">
+                            <li>✅ Evaluación 360° de tu equipo</li>
+                            <li>✅ Plan personalizado de mejora en 30 días</li>
+                            <li>✅ Kit de herramientas con templates y scripts</li>
+                            <li>✅ Coaching individual especializado</li>
+                        </ul>
+                        <a href="ventas.html" class="cta-button">
+                            VER PROGRAMA COMPLETO - $97
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Preguntas del test
+        const questions = [
+            {
+                question: "Cuando un empleado comete un error...",
+                options: [
+                    { text: "Lo corrijo en privado y explico cómo mejorar", score: 0 },
+                    { text: "Lo menciono discretamente frente a otros", score: 1 },
+                    { text: "Lo señalo inmediatamente, sin importar quién esté presente", score: 2 },
+                    { text: "Hago comentarios sarcásticos o lo ridiculizo públicamente", score: 3 }
+                ]
+            },
+            {
+                question: "¿Con qué frecuencia interrumpes a tu equipo cuando están explicando algo?",
+                options: [
+                    { text: "Casi nunca, los dejo terminar sus ideas", score: 0 },
+                    { text: "Solo cuando es urgente", score: 1 },
+                    { text: "Frecuentemente, para acelerar la conversación", score: 2 },
+                    { text: "Constantemente, ya sé lo que van a decir", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando das feedback negativo, tu tono es:",
+                options: [
+                    { text: "Constructivo y enfocado en el trabajo", score: 0 },
+                    { text: "Directo pero respetuoso", score: 1 },
+                    { text: "Firme y a veces áspero", score: 2 },
+                    { text: "Crítico hacia la persona, no solo el trabajo", score: 3 }
+                ]
+            },
+            {
+                question: "¿Cómo reaccionas cuando alguien te da feedback sobre tu liderazgo?",
+                options: [
+                    { text: "Lo agradezco y reflexiono sobre ello", score: 0 },
+                    { text: "Escucho, aunque a veces me molesta", score: 1 },
+                    { text: "Me pongo a la defensiva y explico mis razones", score: 2 },
+                    { text: "Me enojo y les recuerdo quién es el jefe", score: 3 }
+                ]
+            },
+            {
+                question: "¿Qué tan seguido revisas el trabajo de tu equipo?",
+                options: [
+                    { text: "Solo en fechas establecidas o cuando me lo piden", score: 0 },
+                    { text: "Semanalmente para dar apoyo", score: 1 },
+                    { text: "Diariamente para asegurarme que van bien", score: 2 },
+                    { text: "Constantemente, necesito saber qué hacen cada hora", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando delegas una tarea importante:",
+                options: [
+                    { text: "Explico el resultado esperado y los dejo trabajar", score: 0 },
+                    { text: "Doy algunas pautas y hago seguimiento regular", score: 1 },
+                    { text: "Especifico exactamente cómo hacerlo paso a paso", score: 2 },
+                    { text: "Termino haciéndolo yo porque es más rápido", score: 3 }
+                ]
+            },
+            {
+                question: "¿Qué tan cómodo te sientes cuando no sabes exactamente qué está haciendo tu equipo?",
+                options: [
+                    { text: "Muy cómodo, confío en ellos", score: 0 },
+                    { text: "Relativamente cómodo si hay comunicación regular", score: 1 },
+                    { text: "Incómodo, prefiero estar al tanto", score: 2 },
+                    { text: "Muy ansioso, necesito control total", score: 3 }
+                ]
+            },
+            {
+                question: "Tu estado de ánimo en el trabajo es:",
+                options: [
+                    { text: "Generalmente estable y predecible", score: 0 },
+                    { text: "Varía pero mantengo la compostura", score: 1 },
+                    { text: "Cambia según el estrés del día", score: 2 },
+                    { text: "Impredecible, depende de muchas cosas", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando estás bajo presión, ¿cómo tratas a tu equipo?",
+                options: [
+                    { text: "Igual que siempre, trato de protegerlos del estrés", score: 0 },
+                    { text: "Soy más directo pero sigo siendo respetuoso", score: 1 },
+                    { text: "Soy más exigente y menos paciente", score: 2 },
+                    { text: "Descargo mi estrés con ellos", score: 3 }
+                ]
+            },
+            {
+                question: "¿Con qué frecuencia alzas la voz o usas un tono agresivo?",
+                options: [
+                    { text: "Nunca o casi nunca", score: 0 },
+                    { text: "Solo en situaciones muy excepcionales", score: 1 },
+                    { text: "Cuando la situación lo amerita", score: 2 },
+                    { text: "Es mi forma normal de comunicarme cuando estoy serio", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando tu equipo logra un éxito, ¿cómo comunicas el logro a tus superiores?",
+                options: [
+                    { text: "Destaco específicamente quién hizo qué", score: 0 },
+                    { text: "Menciono que fue un esfuerzo de equipo", score: 1 },
+                    { text: "Hablo del resultado pero no siempre menciono nombres", score: 2 },
+                    { text: "Enfatizo mi rol en la coordinación del proyecto", score: 3 }
+                ]
+            },
+            {
+                question: "¿Tienes empleados favoritos?",
+                options: [
+                    { text: "Trato a todos por igual según su desempeño", score: 0 },
+                    { text: "Trabajo mejor con algunos, pero soy justo con todos", score: 1 },
+                    { text: "Sí tengo preferencias, pero trato de ser objetivo", score: 2 },
+                    { text: "Claro, algunos son claramente mejores que otros", score: 3 }
+                ]
+            },
+            {
+                question: "¿Cómo distribuyes las oportunidades de crecimiento?",
+                options: [
+                    { text: "Según mérito y potencial de cada persona", score: 0 },
+                    { text: "Trato de rotar para que todos tengan oportunidades", score: 1 },
+                    { text: "Se las doy a quienes mejor trabajan conmigo", score: 2 },
+                    { text: "A mis empleados de confianza", score: 3 }
+                ]
+            },
+            {
+                question: "¿Contactas a tu equipo fuera del horario laboral?",
+                options: [
+                    { text: "Solo en emergencias reales", score: 0 },
+                    { text: "Ocasionalmente para cosas importantes", score: 1 },
+                    { text: "Regularmente cuando necesito algo", score: 2 },
+                    { text: "Cuando se me ocurre algo, sin importar la hora", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando alguien solicita tiempo libre o vacaciones:",
+                options: [
+                    { text: "Respeto su derecho y planifico cobertura", score: 0 },
+                    { text: "Lo considero según las necesidades del equipo", score: 1 },
+                    { text: "Hago comentarios sobre el timing o la cantidad", score: 2 },
+                    { text: "Los hago sentir culpables o cuestiono su compromiso", score: 3 }
+                ]
+            },
+            {
+                question: "¿Haces comentarios sobre la vida personal de tus empleados?",
+                options: [
+                    { text: "Solo cuando ellos comparten y es apropiado", score: 0 },
+                    { text: "Pregunto por cortesía sobre temas generales", score: 1 },
+                    { text: "A veces comento sobre sus decisiones personales", score: 2 },
+                    { text: "Opino sobre cómo deberían manejar su vida personal", score: 3 }
+                ]
+            },
+            {
+                question: "¿Qué tan seguido renuncian personas de tu equipo?",
+                options: [
+                    { text: "Rara vez, la mayoría se queda varios años", score: 0 },
+                    { text: "Normal, según las oportunidades del mercado", score: 1 },
+                    { text: "Más de lo que me gustaría", score: 2 },
+                    { text: "Frecuentemente, pero es porque no estaban comprometidos", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando alguien renuncia, ¿cuál es la razón más común que dan?",
+                options: [
+                    { text: "Mejor oportunidad externa o crecimiento personal", score: 0 },
+                    { text: "Cambio de carrera o razones familiares", score: 1 },
+                    { text: "Buscan 'mejor ambiente laboral'", score: 2 },
+                    { text: "No dan razones claras o se van abruptamente", score: 3 }
+                ]
+            },
+            {
+                question: "¿Cómo describirías el ambiente cuando entras a una reunión?",
+                options: [
+                    { text: "Relajado y colaborativo", score: 0 },
+                    { text: "Profesional y enfocado", score: 1 },
+                    { text: "Tenso pero productivo", score: 2 },
+                    { text: "Silencioso y cauteloso", score: 3 }
+                ]
+            },
+            {
+                question: "Si le preguntaras anónimamente a tu equipo qué cambiarían de ti como jefe, crees que dirían:",
+                options: [
+                    { text: "Cosas menores de proceso o comunicación", score: 0 },
+                    { text: "Que esté más disponible o dé más feedback", score: 1 },
+                    { text: "Que sea menos exigente o más flexible", score: 2 },
+                    { text: "Que cambie completamente mi estilo de liderazgo", score: 3 }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+        let totalScore = 0;
+
+        // Inicializar el test
+        function initTest() {
+            showQuestion(0);
+            updateProgress();
+        }
+
+        // Mostrar pregunta actual
+        function showQuestion(index) {
+            const question = questions[index];
+            const container = document.getElementById('question-container');
+            
+            container.innerHTML = `
+                <div class="question">
+                    <h3>${question.question}</h3>
+                    <ul class="options">
+                        ${question.options.map((option, i) => `
+                            <li>
+                                <label>
+                                    <input type="radio" name="q${index}" value="${option.score}" onchange="selectAnswer(${index}, ${option.score})">
+                                    ${option.text}
+                                </label>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+
+            // Actualizar navegación
+            document.getElementById('prev-btn').style.display = index > 0 ? 'inline-block' : 'none';
+            document.getElementById('next-btn').textContent = index === questions.length - 1 ? 'Finalizar Test' : 'Siguiente →';
+            
+            updateProgress();
+        }
+
+        // Seleccionar respuesta
+        function selectAnswer(questionIndex, score) {
+            answers[questionIndex] = score;
+        }
+
+        // Siguiente pregunta
+        function nextQuestion() {
+            if (answers[currentQuestion] === undefined) {
+                alert('Por favor selecciona una respuesta antes de continuar.');
+                return;
+            }
+
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            } else {
+                // Test completado
+                switchToEmailCapture();
+            }
+        }
+
+        // Pregunta anterior
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        // Actualizar barra de progreso
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('current-question').textContent = currentQuestion + 1;
+            document.getElementById('total-questions').textContent = questions.length;
+        }
+
+        // Cambiar a captura de email
+        function switchToEmailCapture() {
+            document.getElementById('test-section').classList.add('hidden');
+            document.getElementById('email-capture-section').classList.remove('hidden');
+        }
+
+        // Verificar si el formulario está completo
+        function checkFormComplete() {
+            const name = document.getElementById('result-name').value.trim();
+            const email = document.getElementById('result-email').value.trim();
+            const button = document.getElementById('results-button');
+            
+            if (name && email && email.includes('@')) {
+                button.disabled = false;
+                button.style.opacity = '1';
+                button.style.cursor = 'pointer';
+                // Añadir efecto extra cuando está listo
+                button.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                }, 200);
+            } else {
+                button.disabled = true;
+                button.style.opacity = '0.6';
+                button.style.cursor = 'not-allowed';
+            }
+        }
+
+        // Mostrar resultados
+        function showResults(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('result-name').value;
+            const email = document.getElementById('result-email').value;
+            
+            if (!name || !email) {
+                alert('Por favor completa tu nombre y email para ver los resultados.');
+                return;
+            }
+            
+            // Mostrar email en resultados
+            document.getElementById('user-email-display').textContent = email;
+            
+            // Calcular resultados
+            calculateResults();
+            
+            // Cambiar a resultados
+            document.getElementById('email-capture-section').classList.add('hidden');
+            document.getElementById('results-section').classList.remove('hidden');
+            
+            // Simular envío de email
+            setTimeout(() => {
+                alert(`📧 ¡Resultados enviados a ${email}!\n\nRevisa tu bandeja de entrada en los próximos 5 minutos.\n\nTambién incluimos recursos adicionales y tu plan de acción personalizado.`);
+            }, 1000);
+            
+            // Guardar lead
+            console.log('Lead capturado:', { name, email, score: totalScore });
+        }
+
+        // Calcular resultados
+        function calculateResults() {
+            totalScore = answers.reduce((sum, score) => sum + score, 0);
+            
+            const scoreElement = document.getElementById('final-score');
+            const levelElement = document.getElementById('result-level');
+            const descriptionElement = document.getElementById('result-description');
+            
+            scoreElement.textContent = totalScore + ' puntos';
+            
+            let level, levelClass, description, recommendations;
+            
+            if (totalScore <= 15) {
+                level = "🟢 LÍDER SALUDABLE";
+                levelClass = "nivel-verde";
+                description = "¡Excelente! Tienes un estilo de liderazgo saludable y empático. Tu equipo probablemente te respeta y se siente valorado.";
+                recommendations = [
+                    "Mantén estas buenas prácticas",
+                    "Busca feedback regular para seguir mejorando",
+                    "Considera mentorear a otros líderes"
+                ];
+            } else if (totalScore <= 30) {
+                level = "🟡 SEÑALES DE ALERTA";
+                levelClass = "nivel-amarillo";
+                description = "Hay algunas áreas donde puedes estar desarrollando patrones problemáticos. Es momento de reflexionar y hacer ajustes antes de que se conviertan en problemas mayores.";
+                recommendations = [
+                    "Solicita feedback específico de tu equipo",
+                    "Identifica tus 3 comportamientos más problemáticos",
+                    "Implementa un sistema de autoevaluación semanal"
+                ];
+            } else if (totalScore <= 45) {
+                level = "🟠 LIDERAZGO PROBLEMÁTICO";
+                levelClass = "nivel-naranja";
+                description = "Tu estilo de liderazgo está afectando negativamente a tu equipo. Es urgente trabajar en estos patrones antes de que dañen más la productividad y retención.";
+                recommendations = [
+                    "Busca ayuda profesional inmediatamente",
+                    "Realiza una evaluación 360° con tu equipo",
+                    "Implementa un plan de mejora de 90 días"
+                ];
+            } else {
+                level = "🔴 LIDERAZGO TÓXICO";
+                levelClass = "nivel-rojo";
+                description = "Tu estilo de liderazgo está causando daño real a tu equipo y organización. Necesitas intervención profesional inmediata para transformar tu enfoque.";
+                recommendations = [
+                    "Intervención profesional URGENTE",
+                    "Evaluación psicológica organizacional",
+                    "Plan de transformación intensivo"
+                ];
+            }
+            
+            levelElement.textContent = level;
+            levelElement.className = 'result-level ' + levelClass;
+            
+            descriptionElement.innerHTML = `
+                <div style="margin-bottom: 30px;">
+                    <p style="font-size: 1.1em; margin-bottom: 20px;">${description}</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                    <h4 style="color: #e74c3c; margin-bottom: 15px;">📋 RECOMENDACIONES INMEDIATAS:</h4>
+                    <ul style="text-align: left; max-width: 500px; margin: 0 auto;">
+                        ${recommendations.map(rec => `<li style="margin-bottom: 8px;">${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        // Inicializar el test cuando carga la página
+        window.addEventListener('load', function() {
+            initTest();
+            
+            // Inicializar botón como deshabilitado
+            const button = document.getElementById('results-button');
+            if (button) {
+                button.disabled = true;
+                button.style.opacity = '0.6';
+                button.style.cursor = 'not-allowed';
+            }
+        });
+    </script>
+</body>
+</html>
