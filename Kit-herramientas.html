@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kit de Herramientas para Líderes - Templates y Scripts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .tool-icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+        }
+        
+        .tool-title {
+            flex: 1;
+        }
+        
+        .tool-title h3 {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+        
+        .tool-title p {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .tool-content {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            white-space: pre-line;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-download {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+        }
+        
+        .btn-copy {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+        }
+        
+        .category-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .category-header {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .script-box {
+            background: #e8f5e8;
+            border-left: 4px solid #27ae60;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .script-title {
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        
+        .script-content {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-style: italic;
+            border-left: 3px solid #3498db;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checklist input[type="checkbox"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+        
+        .quick-access {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 200px;
+        }
+        
+        .quick-access h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .quick-link {
+            display: block;
+            color: #3498db;
+            text-decoration: none;
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+            transition: color 0.3s ease;
+        }
+        
+        .quick-link:hover {
+            color: #2980b9;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-access {
+                position: static;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🛠️ Kit de Herramientas para Líderes</h1>
+            <p>Templates, scripts y herramientas prácticas para transformar tu liderazgo<br>
+            <strong>20+ recursos listos para usar inmediatamente</strong></p>
+        </div>
+
+        <!-- QUICK ACCESS MENU -->
+        <div class="quick-access">
+            <h4>📋 Acceso Rápido</h4>
+            <a href="#scripts" class="quick-link">Scripts de Conversación</a>
+            <a href="#templates" class="quick-link">Templates</a>
+            <a href="#checklists" class="quick-link">Checklists</a>
+            <a href="#evaluaciones" class="quick-link">Evaluaciones</a>
+            <a href="#emergencia" class="quick-link">Kit de Emergencia</a>
+        </div>
+
+        <!-- HERRAMIENTAS PRINCIPALES -->
+        <div class="tools-grid">
+            <!-- TEMPLATE 1: AGENDA 1-A-1 -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">📋</div>
+                    <div class="tool-title">
+                        <h3>Template: Reunión 1-a-1</h3>
+                        <p>Estructura probada para reuniones efectivas</p>
+                    </div>
+                </div>
+                <div class="tool-content">AGENDA REUNIÓN 1-A-1 (30 minutos)
+
+📅 Fecha: ___________
+👤 Participante: ___________
+⏰ Duración: 30 min
+
+🔵 APERTURA (5 min)
+• ¿Cómo estás hoy? (personal)
+• ¿Cómo te sientes con tu trabajo?
+• ¿Algo urgente que debamos cubrir?
+
+🔵 PROGRESO Y DESAFÍOS (15 min)
+• ¿En qué proyectos estás trabajando?
+• ¿Qué va bien?
+• ¿Qué obstáculos enfrentas?
+• ¿Dónde te sientes atascado/a?
+
+🔵 DESARROLLO Y APOYO (8 min)
+• ¿Qué necesitas de mí?
+• ¿Cómo puedo ayudarte mejor?
+• ¿Qué recursos te faltan?
+• ¿En qué quieres crecer?
+
+🔵 CIERRE (2 min)
+• Próximos pasos acordados
+• Fecha próxima reunión
+• Una cosa que te lleves de hoy
+
+📝 NOTAS DE SEGUIMIENTO:
+_________________________________
+_________________________________</div>
+                <button class="btn btn-copy" onclick="copyToClipboard('template-1a1')">📋 Copiar Template</button>
+                <button class="btn btn-download" onclick="downloadTemplate('1a1')">📥 Descargar PDF</button>
+            </div>
+
+            <!-- TEMPLATE 2: DELEGACIÓN EFECTIVA -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">🎯</div>
+                    <div class="tool-title">
+                        <h3>Checklist: Delegación Efectiva</h3>
+                        <p>Asegura delegaciones exitosas cada vez</p>
+                    </div>
+                </div>
+                <div class="tool-content">CHECKLIST DE DELEGACIÓN
+
+📋 ANTES DE DELEGAR:
+□ Tarea claramente definida
+□ Resultado esperado específico
+□ Persona con capacidades adecuadas
+□ Recursos disponibles identificados
+□ Tiempo suficiente para completar
+
+📋 AL DELEGAR:
+□ Explicar el contexto y por qué es importante
+□ Describir el resultado final deseado
+□ Acordar fecha límite realista
+□ Definir recursos disponibles
+□ Establecer puntos de check-in
+□ Dar autoridad para tomar decisiones
+□ Confirmar entendimiento
+
+📋 DURANTE LA EJECUCIÓN:
+□ Resistir impulso de micromanagear
+□ Estar disponible para consultas
+□ Hacer check-ins programados únicamente
+□ Ofrecer apoyo sin quitar autonomía
+
+📋 AL FINALIZAR:
+□ Reconocer el trabajo realizado
+□ Dar feedback constructivo
+□ Documentar lecciones aprendidas
+□ Celebrar los éxitos</div>
+                <button class="btn btn-copy" onclick="copyToClipboard('checklist-delegacion')">📋 Copiar Checklist</button>
+                <button class="btn btn-download" onclick="downloadTemplate('delegacion')">📥 Descargar</button>
+            </div>
+
+            <!-- TEMPLATE 3: AUTOEVALUACIÓN DIARIA -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">📊</div>
+                    <div class="tool-title">
+                        <h3>Autoevaluación Diaria</h3>
+                        <p>Trackea tu progreso día a día</p>
+                    </div>
+                </div>
+                <div class="tool-content">AUTOEVALUACIÓN DIARIA DE LIDERAZGO
+
+📅 Fecha: ___________
+
+🎯 COMUNICACIÓN (1-5):
+□ Escuché más de lo que hablé
+□ Hice preguntas antes de dar opiniones
+□ Usé un tono respetuoso siempre
+□ Di feedback constructivo
+Puntuación: ___/5
+
+🎯 DELEGACIÓN (1-5):
+□ Delegué al menos una tarea
+□ Evité micromanagear
+□ Confié en el criterio de mi equipo
+□ Ofrecí apoyo sin quitar autonomía
+Puntuación: ___/5
+
+🎯 INTELIGENCIA EMOCIONAL (1-5):
+□ Mantuve la calma bajo presión
+□ Reconocí mis emociones
+□ No descargué estrés en otros
+□ Mostré empatía genuina
+Puntuación: ___/5
+
+📝 REFLEXIONES:
+• Lo que hice bien hoy:
+_________________________________
+
+• Lo que puedo mejorar mañana:
+_________________________________
+
+• Una acción específica para mañana:
+_________________________________</div>
+                <button class="btn btn-copy" onclick="copyToClipboard('autoevaluacion')">📋 Copiar Formato</button>
+                <button class="btn btn-download" onclick="downloadTemplate('autoevaluacion')">📥 Descargar</button>
+            </div>
+
+            <!-- TEMPLATE 4: PLAN DE DESARROLLO -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">🚀</div>
+                    <div class="tool-title">
+                        <h3>Plan de Desarrollo Individual</h3>
+                        <p>Para cada miembro de tu equipo</p>
+                    </div>
+                </div>
+                <div class="tool-content">PLAN DE DESARROLLO INDIVIDUAL
+
+👤 Nombre: ___________
+📅 Período: ___________
+🎯 Rol Actual: ___________
+
+🔵 FORTALEZAS IDENTIFICADAS:
+1. _________________________________
+2. _________________________________
+3. _________________________________
+
+🔵 ÁREAS DE DESARROLLO:
+1. _________________________________
+2. _________________________________
+3. _________________________________
+
+🔵 OBJETIVOS DE CRECIMIENTO:
+📍 Objetivo 1: ___________
+   Métrica: ___________
+   Fecha límite: ___________
+
+📍 Objetivo 2: ___________
+   Métrica: ___________
+   Fecha límite: ___________
+
+🔵 ACCIONES ESPECÍFICAS:
+• Capacitación necesaria:
+_________________________________
+
+• Proyectos de desarrollo:
+_________________________________
+
+• Mentoría/Coaching:
+_________________________________
+
+🔵 RECURSOS NECESARIOS:
+_________________________________
+
+🔵 SEGUIMIENTO:
+□ Revisión mensual programada
+□ Métricas de progreso definidas
+□ Feedback regular establecido</div>
+                <button class="btn btn-copy" onclick="copyToClipboard('plan-desarrollo')">📋 Copiar Template</button>
+                <button class="btn btn-download" onclick="downloadTemplate('desarrollo')">📥 Descargar</button>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: SCRIPTS DE CONVERSACIÓN -->
+        <div id="scripts" class="category-section">
+            <div class="category-header">
+                <h2>💬 Scripts de Conversación</h2>
+                <p>Frases y diálogos probados para situaciones difíciles</p>
+            </div>
+
+            <div class="script-box">
+                <div class="script-title">🔥 SCRIPT: Conversación de Feedback Difícil</div>
+                <div class="script-content">
+                    <strong>APERTURA:</strong><br>
+                    "Quiero hablar contigo sobre algo importante. Mi intención es ayudarte a crecer y mejorar nuestro trabajo en equipo."<br><br>
+                    
+                    <strong>SITUACIÓN:</strong><br>
+                    "He notado que en [situación específica], [comportamiento observable]. ¿Puedes contarme tu perspectiva sobre esto?"<br><br>
+                    
+                    <strong>IMPACTO:</strong><br>
+                    "El impacto que esto tiene es [consecuencia específica]. Me preocupa porque [razón genuina]."<br><br>
+                    
+                    <strong>COLABORACIÓN:</strong><br>
+                    "¿Qué crees que podemos hacer juntos para mejorar esto? ¿Hay algo que yo pueda hacer diferente para apoyarte mejor?"<br><br>
+                    
+                    <strong>CIERRE:</strong><br>
+                    "Valoramos tu contribución al equipo. ¿Podemos acordar [acción específica] para [fecha específica]?"
+                </div>
+            </div>
+
+            <div class="script-box">
+                <div class="script-title">🤝 SCRIPT: Delegar con Confianza</div>
+                <div class="script-content">
+                    <strong>CONTEXTO:</strong><br>
+                    "Quiero delegarte [proyecto/tarea] porque confío en tu [habilidad específica] y creo que es una gran oportunidad para [beneficio para la persona]."<br><br>
+                    
+                    <strong>OBJETIVO:</strong><br>
+                    "El resultado que necesitamos es [descripción clara]. Esto es importante porque [conexión con objetivos más grandes]."<br><br>
+                    
+                    <strong>AUTONOMÍA:</strong><br>
+                    "Confío en tu criterio para decidir cómo hacerlo. Si necesitas tomar decisiones sobre [área específica], tienes mi autorización completa."<br><br>
+                    
+                    <strong>APOYO:</strong><br>
+                    "Estaré disponible si necesitas consultar algo. Podemos hacer check-in el [fecha específica] para ver cómo vas."<br><br>
+                    
+                    <strong>CONFIANZA:</strong><br>
+                    "Sé que vas a hacer un excelente trabajo. ¿Hay algo que necesites clarificar antes de empezar?"
+                </div>
+            </div>
+
+            <div class="script-box">
+                <div class="script-title">😤 SCRIPT: Manejar tu Propia Frustración</div>
+                <div class="script-content">
+                    <strong>PAUSA INTERNA:</strong><br>
+                    "Me estoy sintiendo frustrado. Necesito tomar un momento para procesar esto antes de responder."<br><br>
+                    
+                    <strong>FRASE DE PAUSA:</strong><br>
+                    "Déjame pensar esto por un momento" o "Quiero asegurarme de responder de manera constructiva."<br><br>
+                    
+                    <strong>RECONOCIMIENTO:</strong><br>
+                    "Reconozco que estoy sintiendo frustración, y eso no debe afectar nuestra conversación."<br><br>
+                    
+                    <strong>REENFOQUE:</strong><br>
+                    "Volvamos al tema principal: ¿cómo podemos resolver esto de manera que funcione para todos?"<br><br>
+                    
+                    <strong>SI NECESITAS MÁS TIEMPO:</strong><br>
+                    "Necesito unos minutos para procesar esto. ¿Podemos continuar esta conversación en [tiempo específico]?"
+                </div>
+            </div>
+
+            <div class="script-box">
+                <div class="script-title">🔄 SCRIPT: Solicitar Feedback de tu Equipo</div>
+                <div class="script-content">
+                    <strong>APERTURA VULNERABLE:</strong><br>
+                    "Estoy trabajando en mejorar mi liderazgo y valoro mucho tu perspectiva."<br><br>
+                    
+                    <strong>PREGUNTA ESPECÍFICA:</strong><br>
+                    "¿Hay algo que yo esté haciendo que te dificulte hacer tu mejor trabajo?"<br><br>
+                    
+                    <strong>ESCUCHA ACTIVA:</strong><br>
+                    "Cuéntame más sobre eso" / "¿Puedes darme un ejemplo específico?"<br><br>
+                    
+                    <strong>AGRADECIMIENTO:</strong><br>
+                    "Te agradezco que compartas esto conmigo. Es exactamente el tipo de feedback que necesito."<br><br>
+                    
+                    <strong>COMPROMISO:</strong><br>
+                    "Voy a trabajar en [acción específica]. ¿Estarías dispuesto/a a darme feedback sobre mi progreso en [tiempo específico]?"
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: TEMPLATES AVANZADOS -->
+        <div id="templates" class="category-section">
+            <div class="category-header">
+                <h2>📋 Templates Avanzados</h2>
+                <p>Formatos estructurados para procesos complejos</p>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">📈</div>
+                        <div class="tool-title">
+                            <h3>Template: Evaluación de Performance</h3>
+                            <p>Estructura para evaluaciones justas y constructivas</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">EVALUACIÓN DE PERFORMANCE
+
+👤 Empleado: ___________
+📅 Período: ___________
+👨‍💼 Evaluador: ___________
+
+🎯 LOGROS DESTACADOS:
+1. _________________________________
+   Impacto: ___________
+   Métrica: ___________
+
+2. _________________________________
+   Impacto: ___________
+   Métrica: ___________
+
+🔵 COMPETENCIAS CLAVE (1-5):
+□ Calidad del trabajo: ___/5
+□ Cumplimiento de plazos: ___/5
+□ Colaboración: ___/5
+□ Iniciativa: ___/5
+□ Comunicación: ___/5
+
+🚀 ÁREAS DE CRECIMIENTO:
+• Fortaleza principal:
+_________________________________
+
+• Área de desarrollo:
+_________________________________
+
+• Objetivo para próximo período:
+_________________________________
+
+💬 COMENTARIOS DEL EMPLEADO:
+_________________________________
+
+🎯 PLAN DE ACCIÓN:
+_________________________________</div>
+                    <button class="btn btn-copy" onclick="copyToClipboard('eval-performance')">📋 Copiar</button>
+                    <button class="btn btn-download" onclick="downloadTemplate('performance')">📥 Descargar</button>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🎯</div>
+                        <div class="tool-title">
+                            <h3>Template: Reunión de Equipo</h3>
+                            <p>Agenda estructurada para reuniones productivas</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">AGENDA REUNIÓN DE EQUIPO
+
+📅 Fecha: ___________
+⏰ Duración: _____ min
+👥 Participantes: ___________
+
+🔵 CHECK-IN (10 min)
+• Estado general del equipo
+• Actualizaciones rápidas por persona
+• Celebraciones y reconocimientos
+
+🔵 TEMAS PRINCIPALES (30 min)
+1. Tema: ___________
+   Objetivo: ___________
+   Tiempo: _____ min
+
+2. Tema: ___________
+   Objetivo: ___________
+   Tiempo: _____ min
+
+🔵 DECISIONES PENDIENTES (15 min)
+• Decisión 1: ___________
+• Decisión 2: ___________
+
+🔵 PRÓXIMOS PASOS (5 min)
+• Acción 1: _____ | Responsable: _____ | Fecha: _____
+• Acción 2: _____ | Responsable: _____ | Fecha: _____
+
+🔵 FEEDBACK RÁPIDO (5 min)
+• ¿Cómo se sintió la reunión?
+• ¿Qué mejorar para la próxima?</div>
+                    <button class="btn btn-copy" onclick="copyToClipboard('agenda-equipo')">📋 Copiar</button>
+                    <button class="btn btn-download" onclick="downloadTemplate('reunion-equipo')">📥 Descargar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: CHECKLISTS RÁPIDOS -->
+        <div id="checklists" class="category-section">
+            <div class="category-header">
+                <h2>✅ Checklists Rápidos</h2>
+                <p>Verificaciones instantáneas para situaciones comunes</p>
+            </div>
+
+            <div class="success-box">
+                <h4>📋 CHECKLIST: Antes de una Conversación Difícil</h4>
+                <ul class="checklist">
+                    <li><input type="checkbox"> Tengo hechos específicos, no opiniones</li>
+                    <li><input type="checkbox"> He pensado en mi objetivo para esta conversación</li>
+                    <li><input type="checkbox"> Estoy en un estado emocional neutral</li>
+                    <li><input type="checkbox"> Tengo tiempo suficiente para la conversación completa</li>
+                    <li><input type="checkbox"> He elegido un lugar privado y apropiado</li>
+                    <li><input type="checkbox"> Tengo claro el resultado que espero</li>
+                    <li><input type="checkbox"> Estoy preparado para escuchar su perspectiva</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ CHECKLIST: Señales de que Estoy Micromanageando</h4>
+                <ul class="checklist">
+                    <li><input type="checkbox"> Pregunto por actualizaciones varias veces al día</li>
+                    <li><input type="checkbox"> Doy instrucciones paso a paso para tareas simples</li>
+                    <li><input type="checkbox"> Reviso trabajo antes de que esté terminado</li>
+                    <li><input type="checkbox"> Tomo decisiones que mi equipo podría tomar</li>
+                    <li><input type="checkbox"> Siento ansiedad cuando no sé qué está haciendo mi equipo</li>
+                    <li><input type="checkbox"> Mi equipo espera mi aprobación para todo</li>
+                    <li><input type="checkbox"> Termino haciendo tareas que delegué</li>
+                </ul>
+            </div>
+
+            <div class="success-box">
+                <h4>🎯 CHECKLIST: Delegación Exitosa</h4>
+                <ul class="checklist">
+                    <li><input type="checkbox"> La persona entiende el "por qué" detrás de la tarea</li>
+                    <li><input type="checkbox"> Ha confirmado que entiende lo que necesito</li>
+                    <li><input type="checkbox"> Tiene los recursos necesarios para completar la tarea</li>
+                    <li><input type="checkbox"> Sabe cuándo y cómo puede pedir ayuda</li>
+                    <li><input type="checkbox"> Tiene autoridad para tomar decisiones necesarias</li>
+                    <li><input type="checkbox"> Hemos acordado un timeline realista</li>
+                    <li><input type="checkbox"> Ha establecido sus propios check-ins conmigo</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: KIT DE EMERGENCIA -->
+        <div id="emergencia" class="category-section">
+            <div class="category-header">
+                <h2>🚨 Kit de Emergencia para Líderes</h2>
+                <p>Recursos para situaciones críticas de liderazgo</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div style="background: #f8d7da; padding: 20px; border-radius: 10px; border-left: 4px solid #dc3545;">
+                    <h4 style="color: #dc3545; margin-bottom: 15px;">🔥 CRISIS: Empleado Clave Quiere Renunciar</h4>
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <strong>PASOS INMEDIATOS:</strong><br>
+                        1. "Entiendo que has tomado una decisión difícil. ¿Puedes ayudarme a entender qué te llevó a este punto?"<br>
+                        2. ESCUCHA sin defenderte o justificarte<br>
+                        3. "¿Hay algo que pudiera cambiar tu decisión?"<br>
+                        4. Si es posible: "¿Estarías dispuesto/a a darme 2 semanas para abordar [preocupación específica]?"<br>
+                        5. Si no es reversible: "¿Cómo podemos hacer una transición que funcione para ambos?"
+                    </div>
+                </div>
+
+                <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 4px solid #ffc107;">
+                    <h4 style="color: #856404; margin-bottom: 15px;">⚠️ TENSIÓN: Conflicto Entre Miembros del Equipo</h4>
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <strong>PLAN DE ACCIÓN:</strong><br>
+                        1. Habla con cada persona por separado PRIMERO<br>
+                        2. "Cuéntame tu perspectiva sobre la situación con [persona]"<br>
+                        3. Identifica puntos en común y malentendidos<br>
+                        4. Facilita reunión conjunta: "Ambos quieren lo mejor para el proyecto"<br>
+                        5. Enfócate en soluciones futuras, no en culpar<br>
+                        6. Establece acuerdos claros y seguimiento
+                    </div>
+                </div>
+
+                <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; border-left: 4px solid #28a745;">
+                    <h4 style="color: #155724; margin-bottom: 15px;">💚 RECUPERACIÓN: Después de un Error de Liderazgo</h4>
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <strong>SCRIPT DE DISCULPA:</strong><br>
+                        1. "Me di cuenta de que [comportamiento específico] y quiero disculparme"<br>
+                        2. "No hay excusa para [acción]. Fue mi responsabilidad hacer mejor"<br>
+                        3. "El impacto que esto tuvo fue [consecuencia] y lamento eso"<br>
+                        4. "He aprendido [lección] y voy a [acción específica] para evitar que vuelva a pasar"<br>
+                        5. "¿Hay algo más que pueda hacer para reparar esto?"
+                    </div>
+                </div>
+
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; border-left: 4px solid #2196f3;">
+                    <h4 style="color: #1565c0; margin-bottom: 15px;">🆘 EMERGENCIA: Situación de Crisis de Equipo</h4>
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <strong>PROTOCOLO INMEDIATO:</strong><br>
+                        1. Reunión de emergencia en 2 horas máximo<br>
+                        2. "Tenemos una situación que requiere nuestra atención inmediata"<br>
+                        3. Presenta hechos sin culpar: "Esto es lo que sabemos..."<br>
+                        4. "Necesito sus ideas para resolver esto juntos"<br>
+                        5. Asigna roles específicos y timeline claro<br>
+                        6. Check-in cada 4 horas hasta resolución
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: EVALUACIONES RÁPIDAS -->
+        <div id="evaluaciones" class="category-section">
+            <div class="category-header">
+                <h2>📊 Evaluaciones Rápidas</h2>
+                <p>Mini-assessments para trackear progreso</p>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🎯</div>
+                        <div class="tool-title">
+                            <h3>Evaluación Semanal de Clima</h3>
+                            <p>5 preguntas para tu equipo cada viernes</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">PULSO SEMANAL DEL EQUIPO
+(Enviar cada viernes, 2 minutos para responder)
+
+📊 Escala: 1 (Muy bajo) - 5 (Excelente)
+
+1. ¿Qué tan claro tienes tus prioridades esta semana?
+   □ 1  □ 2  □ 3  □ 4  □ 5
+
+2. ¿Qué tan apoyado/a te sientes por tu líder?
+   □ 1  □ 2  □ 3  □ 4  □ 5
+
+3. ¿Qué tan bien fluye la comunicación en el equipo?
+   □ 1  □ 2  □ 3  □ 4  □ 5
+
+4. ¿Qué tan motivado/a te sientes con tu trabajo?
+   □ 1  □ 2  □ 3  □ 4  □ 5
+
+5. ¿Hay algo que necesites para la próxima semana?
+   _________________________________
+
+💡 Una palabra para describir esta semana:
+_________________________________</div>
+                    <button class="btn btn-copy" onclick="copyToClipboard('pulso-semanal')">📋 Copiar</button>
+                    <button class="btn btn-download" onclick="downloadTemplate('pulso')">📥 Descargar</button>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🔍</div>
+                        <div class="tool-title">
+                            <h3>Auto-Diagnóstico Express</h3>
+                            <p>Evaluación rápida de 2 minutos</p>
+                        </div>
+                    </div>
+                    <div class="tool-content">AUTO-DIAGNÓSTICO EXPRESS
+(Completar al final de cada día)
+
+📅 Fecha: ___________
+
+✅ HOY LOGRÉ:
+□ Escuchar más de lo que hablé
+□ Hacer preguntas antes de dar respuestas
+□ Delegar sin micromanagear
+□ Mantener calma bajo presión
+□ Reconocer el trabajo de alguien
+□ Dar feedback constructivo
+□ Pedir ayuda cuando la necesité
+
+⚠️ ÁREAS PARA MAÑANA:
+□ Mejorar mi paciencia
+□ Escuchar más activamente
+□ Delegar más tareas
+□ Ser más claro en comunicación
+□ Controlar mejor mis emociones
+□ Dar más reconocimiento
+□ Solicitar más feedback
+
+🎯 PRIORIDAD #1 PARA MAÑANA:
+_________________________________
+
+💪 UNA COSA QUE HARÉ DIFERENTE:
+_________________________________</div>
+                    <button class="btn btn-copy" onclick="copyToClipboard('auto-diagnostico')">📋 Copiar</button>
+                    <button class="btn btn-download" onclick="downloadTemplate('diagnostico')">📥 Descargar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RECURSOS ADICIONALES -->
+        <div class="category-section">
+            <div class="category-header">
+                <h2>📚 Recursos de Apoyo</h2>
+                <p>Material complementario para tu desarrollo</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid #6f42c1;">
+                    <h4 style="color: #6f42c1; margin-bottom: 15px;">📖 Frases Poderosas para Usar Diariamente</h4>
+                    <ul style="line-height: 2;">
+                        <li>"¿Qué opinas tú?"</li>
+                        <li>"Cuéntame más sobre eso"</li>
+                        <li>"Confío en tu criterio"</li>
+                        <li>"¿Cómo puedo ayudarte?"</li>
+                        <li>"Gracias por traerme esto"</li>
+                        <li>"¿Qué necesitas de mí?"</li>
+                        <li>"Aprecio tu perspectiva"</li>
+                        <li>"Déjame entender bien..."</li>
+                    </ul>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid #dc3545;">
+                    <h4 style="color: #dc3545; margin-bottom: 15px;">🚫 Frases que NUNCA Debes Usar</h4>
+                    <ul style="line-height: 2;">
+                        <li>"Porque yo lo digo"</li>
+                        <li>"Siempre haces esto mal"</li>
+                        <li>"No hay tiempo para explicar"</li>
+                        <li>"Deberías saber esto"</li>
+                        <li>"Esto es obviamente..."</li>
+                        <li>"Nunca entiendes"</li>
+                        <li>"Hazlo como te digo"</li>
+                        <li>"No es mi problema"</li>
+                    </ul>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid #28a745;">
+                    <h4 style="color: #28a745; margin-bottom: 15px;">💡 Tips para Situaciones Específicas</h4>
+                    <div style="margin-bottom: 10px;">
+                        <strong>Cuando alguien comete un error:</strong><br>
+                        "¿Qué aprendiste de esto? ¿Cómo podemos evitarlo en el futuro?"
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <strong>Cuando necesitas urgencia:</strong><br>
+                        "Esto es prioritario porque [razón]. ¿Qué necesitas para lograrlo?"
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <strong>Cuando hay resistencia:</strong><br>
+                        "Noto cierta resistencia. ¿Puedes ayudarme a entender tus preocupaciones?"
+                    </div>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid #ffc107;">
+                    <h4 style="color: #856404; margin-bottom: 15px;">⏰ Rutina Diaria del Líder Consciente</h4>
+                    <div style="line-height: 1.8;">
+                        <strong>Mañana (5 min):</strong><br>
+                        • Intención del día<br>
+                        • ¿Cómo quiero que mi equipo se sienta hoy?<br><br>
+                        
+                        <strong>Mediodía (2 min):</strong><br>
+                        • Pausa y respiración<br>
+                        • ¿Estoy siendo el líder que quiero ser?<br><br>
+                        
+                        <strong>Noche (3 min):</strong><br>
+                        • Reflexión del día<br>
+                        • Una cosa para mejorar mañana
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CALL TO ACTION FINAL -->
+        <div style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 40px; border-radius: 20px; text-align: center; margin: 40px 0;">
+            <h2 style="margin-bottom: 20px;">🎉 ¡Tienes Todo lo Necesario!</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">
+                Con estas 20+ herramientas tienes todo lo que necesitas para transformar tu liderazgo. 
+                Lo más importante: <strong>empieza hoy mismo con una sola herramienta.</strong>
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <button class="btn btn-download" onclick="downloadAllTemplates()">📥 Descargar Todo el Kit</button>
+                <button class="btn" onclick="emailTemplates()">📧 Enviar por Email</button>
+                <button class="btn btn-success" onclick="trackProgress()">📊 Comenzar Tracking</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para copiar al portapapeles
+        function copyToClipboard(templateId) {
+            const templateContent = document.querySelector(`[onclick*="${templateId}"]`).parentElement.querySelector('.tool-content').textContent;
+            navigator.clipboard.writeText(templateContent).then(() => {
+                alert('📋 ¡Template copiado al portapapeles!\n\nPuedes pegarlo donde lo necesites.');
+            }).catch(() => {
+                alert('Error al copiar. Intenta seleccionar el texto manualmente.');
+            });
+        }
+
+        // Función para simular descarga de template
+        function downloadTemplate(templateName) {
+            alert(`📥 Descargando template: ${templateName}\n\nEn el sistema real, esto descargaría un PDF profesional del template.`);
+        }
+
+        // Función para descargar todo el kit
+        function downloadAllTemplates() {
+            alert('📦 Descargando Kit Completo...\n\nEn el sistema real, esto descargaría:\n\n✅ 20+ Templates en PDF\n✅ Guía de implementación\n✅ Videos explicativos\n✅ Checklist de progreso');
+        }
+
+        // Función para enviar por email
+        function emailTemplates() {
+            alert('📧 Enviando Kit por Email...\n\nSe enviará a tu email registrado:\n\n✅ Todos los templates\n✅ Enlaces de acceso\n✅ Recursos adicionales');
+        }
+
+        // Función para comenzar tracking
+        function trackProgress() {
+            alert('📊 Iniciando Sistema de Tracking...\n\nEn el sistema real, esto:\n\n✅ Configuraría recordatorios\n✅ Crearía dashboard personal\n✅ Establecería métricas\n✅ Programaría evaluaciones');
+        }
+
+        // Smooth scroll para navegación rápida
+        document.querySelectorAll('.quick-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Tracking de herramientas más usadas
+        let toolUsage = {};
+        
+        function trackToolUsage(toolName) {
+            toolUsage[toolName] = (toolUsage[toolName] || 0) + 1;
+            console.log('Herramienta más popular:', Object.keys(toolUsage).reduce((a, b) => toolUsage[a] > toolUsage[b] ? a : b));
+        }
+
+        // Event listeners para tracking
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const toolCard = this.closest('.tool-card');
+                if (toolCard) {
+                    const toolName = toolCard.querySelector('h3').textContent;
+                    trackToolUsage(toolName);
+                }
+            });
+        });
+
+        // Analytics
+        console.log('Kit de Herramientas cargado exitosamente');
+        console.log('Total de herramientas disponibles: 20+');
+        console.log('Tiempo estimado para implementar: 15-30 días');
+    </script>
+</body>
+</html>

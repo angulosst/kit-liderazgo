@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass: Feedback que Transforma - BONUS Exclusivo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(155, 89, 182, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+        
+        .video-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .video-player {
+            background: #000;
+            border-radius: 10px;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-placeholder {
+            color: white;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        
+        .play-button {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .play-button::after {
+            content: '▶';
+            font-size: 2em;
+            color: #333;
+            margin-left: 5px;
+        }
+        
+        .module-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-left: 4px solid #9b59b6;
+        }
+        
+        .module-header {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .module-number {
+            background: rgba(255,255,255,0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        
+        .module-title {
+            flex: 1;
+        }
+        
+        .module-duration {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .technique-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .technique-title {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .example-box {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .bad-example {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        
+        .script-template {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .progress-tracker {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .progress-bar {
+            background: #ecf0f1;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .chapter-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .chapter-item {
+            padding: 12px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid #9b59b6;
+        }
+        
+        .chapter-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .chapter-item.active {
+            background: #9b59b6;
+            color: white;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+        }
+        
+        .downloads-section {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .resource-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
+            .header h1 {
+                font-size: 2.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🎤 MASTERCLASS EXCLUSIVA</h1>
+            <div class="subtitle">Feedback que Transforma: De Crítica Destructiva a Conversación Poderosa</div>
+            <div style="margin-top: 20px; font-size: 0.9em; opacity: 0.9;">
+                ⏱️ 45 minutos • 📚 6 módulos • 🎯 20+ técnicas prácticas • 💼 Ejemplos reales
+            </div>
+        </div>
+
+        <!-- VIDEO PRINCIPAL -->
+        <div class="video-section">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">🎥 Video Principal - Masterclass Completa</h2>
+            <div class="video-player" onclick="playMainVideo()">
+                <div class="video-placeholder">
+                    <h3>Masterclass: Feedback que Transforma</h3>
+                    <p>45 minutos de contenido exclusivo con Nhora Felipa</p>
+                    <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
+                        Aprende las técnicas exactas que usan los mejores líderes para dar feedback que motiva en lugar de destruir
+                    </p>
+                </div>
+                <div class="play-button"></div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+                <button class="btn btn-primary" onclick="playMainVideo()">🎥 Ver Masterclass</button>
+                <button class="btn" onclick="downloadVideo()">📥 Descargar Video</button>
+                <button class="btn" onclick="downloadTranscript()">📄 Descargar Transcripción</button>
+            </div>
+        </div>
+
+        <!-- CONTENIDO MODULAR -->
+        <div class="content-grid">
+            <div class="main-content">
+                <!-- MÓDULO 1 -->
+                <div class="module-section" id="module1">
+                    <div class="module-header">
+                        <div class="module-number">1</div>
+                        <div class="module-title">
+                            <h3>El Problema del Feedback Tradicional</h3>
+                            <p>Por qué la mayoría de feedback daña en lugar de ayudar</p>
+                        </div>
+                        <div class="module-duration">8 min</div>
+                    </div>
+
+                    <p style="margin-bottom: 20px;">
+                        El 89% de los empleados dice que ha recibido feedback que los desmotivó en lugar de ayudarlos. 
+                        En este módulo descubrirás por qué el enfoque tradicional falla y cómo cambiar completamente tu perspectiva.
+                    </p>
+
+                    <div class="technique-box">
+                        <div class="technique-title">🧠 CAMBIO DE MENTALIDAD</div>
+                        <p><strong>De:</strong> "Voy a decirle lo que está mal"</p>
+                        <p><strong>A:</strong> "Voy a ayudarle a crecer"</p>
+                        <p><strong>De:</strong> "Necesito que cambie"</p>
+                        <p><strong>A:</strong> "¿Cómo puedo apoyar su desarrollo?"</p>
+                    </div>
+
+                    <div class="example-box bad-example">
+                        <h4 style="color: #dc3545;">❌ EJEMPLO - Feedback Destructivo</h4>
+                        <p><em>"Tu presentación estuvo terrible. No estabas preparado y se notó. La próxima vez necesitas esforzarte más."</em></p>
+                        <p><strong>Por qué daña:</strong> Ataca a la persona, es vago, no ofrece soluciones.</p>
+                    </div>
+
+                    <div class="example-box">
+                        <h4 style="color: #27ae60;">✅ EJEMPLO - Feedback Transformador</h4>
+                        <p><em>"Noté que en la sección de datos te saltaste algunos puntos clave. ¿Qué pasó ahí? ¿Cómo puedo ayudarte a preparar mejor esa parte para la próxima?"</em></p>
+                        <p><strong>Por qué funciona:</strong> Específico, curioso, orientado a soluciones.</p>
+                    </div>
+                </div>
+
+                <!-- MÓDULO 2 -->
+                <div class="module-section" id="module2">
+                    <div class="module-header">
+                        <div class="module-number">2</div>
+                        <div class="module-title">
+                            <h3>La Metodología SBI-I</h3>
+                            <p>Situación - Comportamiento - Impacto - Intención</p>
+                        </div>
+                        <div class="module-duration">10 min</div>
+                    </div>
+
+                    <p style="margin-bottom: 20px;">
+                        La metodología más efectiva para dar feedback constructivo. Usada por Google, Microsoft y las mejores empresas del mundo.
+                    </p>
+
+                    <div class="script-template">
+                        <h4 style="color: #856404; margin-bottom: 15px;">📝 TEMPLATE SBI-I</h4>
+                        <p><strong>SITUACIÓN:</strong> "En la reunión de esta mañana..."</p>
+                        <p><strong>COMPORTAMIENTO:</strong> "Cuando interrumpiste a Ana mientras explicaba..."</p>
+                        <p><strong>IMPACTO:</strong> "Vi que se sintió frustrada y no terminó su idea..."</p>
+                        <p><strong>INTENCIÓN:</strong> "Sé que querías aportar valor. ¿Cómo podemos manejar esto diferente?"</p>
+                    </div>
+
+                    <div class="technique-box">
+                        <div class="technique-title">🎯 CLAVE DEL ÉXITO</div>
+                        <p><strong>Observación vs. Interpretación:</strong></p>
+                        <p>❌ "Fuiste grosero" (interpretación)</p>
+                        <p>✅ "Interrumpiste 3 veces" (observación)</p>
+                        <p>❌ "No te importa el proyecto" (interpretación)</p>
+                        <p>✅ "Llegaste 15 minutos tarde" (observación)</p>
+                    </div>
+                </div>
+
+                <!-- MÓDULO 3 -->
+                <div class="module-section" id="module3">
+                    <div class="module-header">
+                        <div class="module-number">3</div>
+                        <div class="module-title">
+                            <h3>Feedback en Situaciones Difíciles</h3>
+                            <p>Manejo de conversaciones complicadas</p>
+                        </div>
+                        <div class="module-duration">12 min</div>
+                    </div>
+
+                    <p style="margin-bottom: 20px;">
+                        Las situaciones más difíciles requieren técnicas especiales. Aprende a manejar defensividad, 
+                        negación y situaciones de alto conflicto.
+                    </p>
+
+                    <div class="technique-box">
+                        <div class="technique-title">🛡️ MANEJO DE DEFENSIVIDAD</div>
+                        <p><strong>Cuando dicen:</strong> "Eso no es cierto"</p>
+                        <p><strong>No digas:</strong> "Sí es cierto, yo lo vi"</p>
+                        <p><strong>Di:</strong> "Entiendo que lo veas diferente. Cuéntame tu perspectiva."</p>
+                    </div>
+
+                    <div class="script-template">
+                        <h4 style="color: #856404; margin-bottom: 15px;">📝 SCRIPT - Empleado Defensivo</h4>
+                        <p>"Veo que esto te está afectando. No es mi intención atacarte."</p>
+                        <p>"Mi objetivo es que ambos entendamos qué pasó para poder mejorar."</p>
+                        <p>"¿Puedes ayudarme a ver la situación desde tu perspectiva?"</p>
+                        <p>"¿Qué parte de lo que dije resuena contigo? ¿Qué parte no?"</p>
+                    </div>
+
+                    <div class="example-box">
+                        <h4 style="color: #27ae60;">✅ TÉCNICA - El Sandwich Mejorado</h4>
+                        <p><strong>NO:</strong> Positivo → Negativo → Positivo (la gente espera la crítica)</p>
+                        <p><strong>SÍ:</strong> Contexto → Específico → Futuro</p>
+                        <p>1. "Valoro tu compromiso con el equipo..."</p>
+                        <p>2. "En la situación específica de ayer..."</p>
+                        <p>3. "Para proyectos futuros, ¿qué tal si...?"</p>
+                    </div>
+                </div>
+
+                <!-- MÓDULO 4 -->
+                <div class="module-section" id="module4">
+                    <div class="module-header">
+                        <div class="module-number">4</div>
+                        <div class="module-title">
+                            <h3>Feedback Positivo que Motiva</h3>
+                            <p>Reconocimiento que impulsa el crecimiento</p>
+                        </div>
+                        <div class="module-duration">7 min</div>
+                    </div>
+
+                    <p style="margin-bottom: 20px;">
+                        El feedback positivo mal dado puede sonar falso o condescendiente. 
+                        Aprende a reconocer de manera que motive crecimiento continuo.
+                    </p>
+
+                    <div class="example-box bad-example">
+                        <h4 style="color: #dc3545;">❌ Reconocimiento Vacío</h4>
+                        <p><em>"¡Buen trabajo!"</em></p>
+                        <p><em>"¡Excelente presentación!"</em></p>
+                        <p><strong>Problema:</strong> Vago, no específico, no ayuda a repetir el éxito.</p>
+                    </div>
+
+                    <div class="example-box">
+                        <h4 style="color: #27ae60;">✅ Reconocimiento Poderoso</h4>
+                        <p><em>"La forma como estructuraste los datos en la página 3 hizo que el punto principal fuera cristalino. Esa claridad ayudó al equipo a tomar la decisión inmediatamente."</em></p>
+                        <p><strong>Por qué funciona:</strong> Específico, conecta acción con resultado, refuerza comportamiento.</p>
+                    </div>
+
+                    <div class="technique-box">
+                        <div class="technique-title">🎯 FÓRMULA STAR</div>
+                        <p><strong>S</strong>ituación específica</p>
+                        <p><strong>T</strong>area o comportamiento observado</p>
+                        <p><strong>A</strong>cción concreta que tomó</p>
+                        <p><strong>R</strong>esultado e impacto positivo</p>
+                    </div>
+                </div>
+
+                <!-- MÓDULO 5 -->
+                <div class="module-section" id="module5">
+                    <div class="module-header">
+                        <div class="module-number">5</div>
+                        <div class="module-title">
+                            <h3>Creando Cultura de Feedback</h3>
+                            <p>Sistemas para feedback continuo y natural</p>
+                        </div>
+                        <div class="module-duration">6 min</div>
+                    </div>
+
+                    <p style="margin-bottom: 20px;">
+                        El mejor feedback no es evento, es cultura. Aprende a crear un ambiente donde 
+                        el feedback fluya naturalmente en ambas direcciones.
+                    </p>
+
+                    <div class="technique-box">
+                        <div class="technique-title">🔄 SISTEMA DE 3 CAPAS</div>
+                        <p><strong>Capa 1:</strong> Feedback en el momento (inmediato)</p>
+                        <p><strong>Capa 2:</strong> Reflexión semanal (estructurado)</p>
+                        <p><strong>Capa 3:</strong> Evaluación formal (trimestral)</p>
+                    </div>
+
+                    <div class="script-template">
+                        <h4 style="color: #856404; margin-bottom: 15px;">📝 CREAR APERTURA AL FEEDBACK</h4>
+                        <p>"Quiero ser mejor líder para ti. ¿Hay algo que pueda hacer diferente?"</p>
+                        <p>"¿Qué necesitas más de mí? ¿Qué necesitas menos?"</p>
+                        <p>"Si pudieras cambiar una cosa de cómo trabajo contigo, ¿qué sería?"</p>
+                        <p>"¿En qué momento te sientes más/menos apoyado por mí?"</p>
+                    </div>
+                </div>
+
+                <!-- MÓDULO 6 -->
+                <div class="module-section" id="module6">
+                    <div class="module-header">
+                        <div class="module-number">6</div>
+                        <div class="module-title">
+                            <h3>Práctica y Simulaciones</h3>
+                            <p>Casos reales para perfeccionar tu técnica</p>
+                        </div>
+                        <div class="module-duration">2 min</div>
+                    </div>
+
+                    <p style="margin-bottom: 20px;">
+                        5 escenarios reales con scripts completos y análisis de qué funciona y qué no.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                            <h5>Caso 1</h5>
+                            <p>Empleado Tardío</p>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                            <h5>Caso 2</h5>
+                            <p>Calidad Baja</p>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                            <h5>Caso 3</h5>
+                            <p>Conflicto Interpersonal</p>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                            <h5>Caso 4</h5>
+                            <p>Falta de Iniciativa</p>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                            <h5>Caso 5</h5>
+                            <p>Resistencia al Cambio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIDEBAR -->
+            <div class="sidebar">
+                <div class="progress-tracker">
+                    <h4>📈 Tu Progreso</h4>
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                        <span>Completado:</span>
+                        <span id="progress-text">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+
+                <h4 style="margin-bottom: 15px;">📋 Índice de Contenidos</h4>
+                <ul class="chapter-list">
+                    <li class="chapter-item active" onclick="goToModule(1)">
+                        <strong>Módulo 1:</strong> El Problema del Feedback
+                    </li>
+                    <li class="chapter-item" onclick="goToModule(2)">
+                        <strong>Módulo 2:</strong> Metodología SBI-I
+                    </li>
+                    <li class="chapter-item" onclick="goToModule(3)">
+                        <strong>Módulo 3:</strong> Situaciones Difíciles
+                    </li>
+                    <li class="chapter-item" onclick="goToModule(4)">
+                        <strong>Módulo 4:</strong> Feedback Positivo
+                    </li>
+                    <li class="chapter-item" onclick="goToModule(5)">
+                        <strong>Módulo 5:</strong> Cultura de Feedback
+                    </li>
+                    <li class="chapter-item" onclick="goToModule(6)">
+                        <strong>Módulo 6:</strong> Práctica y Casos
+                    </li>
+                </ul>
+
+                <div style="margin-top: 30px; text-align: center;">
+                    <button class="btn btn-primary" onclick="downloadWorkbook()">
+                        📚 Descargar Workbook
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RECURSOS DESCARGABLES -->
+        <div class="downloads-section">
+            <h2 style="margin-bottom: 20px;">📥 Recursos Descargables</h2>
+            <p style="font-size: 1.1em; margin-bottom: 30px;">
+                Todo lo que necesitas para implementar inmediatamente lo aprendido
+            </p>
+            
+            <div class="resource-grid">
+                <div class="resource-card" onclick="downloadResource('templates')">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">📝</div>
+                    <h4>Templates SBI-I</h4>
+                    <p>10 plantillas listas para usar</p>
+                </div>
+                <div class="resource-card" onclick="downloadResource('scripts')">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">💬</div>
+                    <h4>Scripts Completos</h4>
+                    <p>25 conversaciones de ejemplo</p>
+                </div>
+                <div class="resource-card" onclick="downloadResource('checklist')">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">✅</div>
+                    <h4>Checklist Pre-Feedback</h4>
+                    <p>Preparación para cada conversación</p>
+                </div>
+                <div class="resource-card" onclick="downloadResource('workbook')">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">📚</div>
+                    <h4>Workbook Completo</h4>
+                    <p>Ejercicios y casos prácticos</p>
+                </div>
+                <div class="resource-card" onclick="downloadResource('audio')">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">🎧</div>
+                    <h4>Versión Audio</h4>
+                    <p>Para escuchar en el auto</p>
+                </div>
+                <div class="resource-card" onclick="downloadResource('slides')">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">📊</div>
+                    <h4>Slides de Presentación</h4>
+                    <p>Para entrenar a tu equipo</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- IMPLEMENTACIÓN INMEDIATA -->
+        <div style="background: white; padding: 40px; border-radius: 15px; margin: 30px 0; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+            <h2 style="color: #2c3e50; text-align: center; margin-bottom: 30px;">🚀 Plan de Implementación Inmediata</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; border-left: 4px solid #2196f3;">
+                    <h4 style="color: #1565c0;">📅 Esta Semana</h4>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>Practica SBI-I con 1 situación</li>
+                        <li>Solicita feedback de 2 personas</li>
+                        <li>Usa el template de reconocimiento</li>
+                    </ul>
+                </div>
+                <div style="background: #f3e5f5; padding: 20px; border-radius: 10px; border-left: 4px solid #9c27b0;">
+                    <h4 style="color: #7b1fa2;">📅 Próximas 2 Semanas</h4>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>Implementa feedback semanal</li>
+                        <li>Maneja 1 conversación difícil</li>
+                        <li>Crea cultura de feedback abierto</li>
+                    </ul>
+                </div>
+                <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; border-left: 4px solid #4caf50;">
+                    <h4 style="color: #2e7d32;">📅 Próximo Mes</h4>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>Entrena a tu equipo en feedback</li>
+                        <li>Establece sistema de 3 capas</li>
+                        <li>Mide mejora en clima laboral</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CERTIFICACIÓN -->
+        <div style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white; padding: 40px; border-radius: 20px; text-align: center; margin: 40px 0;">
+            <h2 style="margin-bottom: 20px;">🏆 Certificación Incluida</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">
+                Completa la masterclass y obtén tu certificación oficial en "Feedback Transformador"
+            </p>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h4>📋 Para Obtener tu Certificación:</h4>
+                <ul style="text-align: left; max-width: 400px; margin: 15px auto; line-height: 2;">
+                    <li>✅ Completa los 6 módulos</li>
+                    <li>✅ Realiza los ejercicios del workbook</li>
+                    <li>✅ Implementa 3 técnicas esta semana</li>
+                    <li>✅ Comparte 1 caso de éxito</li>
+                </ul>
+            </div>
+            <button class="btn" style="background: white; color: #ee5a24; font-weight: bold;" onclick="getCertification()">
+                🎓 Obtener Mi Certificación
+            </button>
+        </div>
+
+        <!-- MENSAJE FINAL -->
+        <div style="background: linear-gradient(45deg, #2c3e50, #34495e); color: white; padding: 40px; border-radius: 20px; text-align: center; margin: 40px 0;">
+            <h2 style="margin-bottom: 20px;">💎 El Feedback es tu Superpoder</h2>
+            <p style="font-size: 1.2em; margin-bottom: 25px;">
+                La habilidad de dar feedback transformador es lo que separa a los buenos líderes de los excepcionales.
+            </p>
+            <p style="margin-bottom: 25px;">
+                Con estas técnicas no solo mejorarás el desempeño de tu equipo, sino que crearás una cultura donde las personas crecen, se sienten valoradas y dan lo mejor de sí mismas.
+            </p>
+            <p style="font-size: 1.1em; font-weight: bold;">
+                Tu equipo está esperando este nivel de liderazgo. ¡Es hora de dárselo!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let completedModules = new Set();
+        
+        // Función para reproducir video principal
+        function playMainVideo() {
+            alert('🎥 Reproduciendo Masterclass...\n\nEn el sistema real, esto:\n\n✅ Reproduciría el video HD de 45 min\n✅ Guardaría tu progreso automáticamente\n✅ Permitiría tomar notas en tiempo real\n✅ Activaría subtítulos si los necesitas');
+            
+            // Simular progreso
+            setTimeout(() => {
+                updateProgress(100);
+            }, 1000);
+        }
+
+        // Navegación entre módulos
+        function goToModule(moduleNumber) {
+            // Remover clase active de todos los items
+            document.querySelectorAll('.chapter-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Agregar clase active al módulo seleccionado
+            document.querySelectorAll('.chapter-item')[moduleNumber - 1].classList.add('active');
+            
+            // Scroll al módulo
+            document.getElementById(`module${moduleNumber}`).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Marcar como completado
+            completedModules.add(moduleNumber);
+            updateProgress();
+        }
+
+        // Actualizar barra de progreso
+        function updateProgress(manual = null) {
+            const totalModules = 6;
+            const completed = manual !== null ? manual : Math.round((completedModules.size / totalModules) * 100);
+            
+            document.getElementById('progress-fill').style.width = completed + '%';
+            document.getElementById('progress-text').textContent = completed + '%';
+            
+            if (completed === 100) {
+                setTimeout(() => {
+                    alert('🎉 ¡MASTERCLASS COMPLETADA!\n\nFelicitaciones por completar todos los módulos.\n\n🏆 Tu certificación estará lista en 24 horas\n📧 Te enviaremos el enlace por email');
+                }, 1000);
+            }
+        }
+
+        // Funciones de descarga
+        function downloadVideo() {
+            alert('📥 Descargando video...\n\nEl video se está descargando en calidad HD.\n\nTamaño: 850 MB\nFormato: MP4\nDuración: 45 minutos');
+        }
+
+        function downloadTranscript() {
+            alert('📄 Descargando transcripción...\n\nIncluye:\n✅ Transcripción completa\n✅ Timestamps\n✅ Puntos clave destacados\n✅ Referencias y enlaces');
+        }
+
+        function downloadResource(type) {
+            const resources = {
+                'templates': '📝 Templates SBI-I\n\n10 plantillas diferentes para situaciones específicas',
+                'scripts': '💬 Scripts Completos\n\n25 conversaciones de ejemplo con análisis',
+                'checklist': '✅ Checklist Pre-Feedback\n\nVerificación antes de cada conversación',
+                'workbook': '📚 Workbook Completo\n\n50+ páginas de ejercicios y casos prácticos',
+                'audio': '🎧 Versión Audio\n\nMasterclass en formato MP3 para escuchar donde quieras',
+                'slides': '📊 Slides de Presentación\n\nPara entrenar a tu equipo (PowerPoint)'
+            };
+            
+            alert(`📥 Descargando...\n\n${resources[type]}\n\nSe guardará en tu carpeta de descargas.`);
+        }
+
+        function downloadWorkbook() {
+            alert('📚 Descargando Workbook...\n\nWorkbook de 50+ páginas incluye:\n\n✅ Ejercicios prácticos\n✅ Plantillas editables\n✅ Casos de estudio\n✅ Plan de implementación\n✅ Autoevaluaciones');
+        }
+
+        function getCertification() {
+            if (completedModules.size >= 6) {
+                alert('🎓 Procesando Certificación...\n\nTu certificación oficial será enviada a tu email en las próximas 24 horas.\n\nIncluye:\n✅ Certificado digital firmado\n✅ Badge para LinkedIn\n✅ Créditos de educación continua');
+            } else {
+                alert('📚 Completa todos los módulos primero\n\nTe faltan: ' + (6 - completedModules.size) + ' módulos\n\nUna vez completados, tu certificación será automática.');
+            }
+        }
+
+        // Tracking de progreso automático
+        window.addEventListener('scroll', function() {
+            const modules = document.querySelectorAll('.module-section');
+            modules.forEach((module, index) => {
+                const rect = module.getBoundingClientRect();
+                if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                    completedModules.add(index + 1);
+                    updateProgress();
+                }
+            });
+        });
+
+        // Analytics
+        console.log('Masterclass de Feedback cargada exitosamente');
+        console.log('Duración total: 45 minutos');
+        console.log('Recursos incluidos: 6 descargables');
+        
+        // Simular tracking de tiempo
+        let watchTime = 0;
+        setInterval(() => {
+            watchTime++;
+            if (watchTime % 300 === 0) { // Cada 5 minutos
+                console.log(`Tiempo de visualización: ${watchTime/60} minutos`);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

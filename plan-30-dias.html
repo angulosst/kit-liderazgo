@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Transformación de Liderazgo - 30 Días</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .week-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .week-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #e74c3c, #f39c12, #27ae60, #3498db);
+        }
+        
+        .week-header {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .week-header h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .week-header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .day-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .day-number {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .day-title {
+            flex: 1;
+            font-size: 1.3em;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .time-estimate {
+            background: #e8f5e8;
+            color: #27ae60;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        .activity-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .activity-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #27ae60;
+            display: flex;
+            align-items: center;
+        }
+        
+        .activity-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .activity-description {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .quick-win {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        
+        .progress-tracker {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+        }
+        
+        .progress-bar {
+            background: #ecf0f1;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        
+        .milestone {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .milestone h3 {
+            margin-bottom: 10px;
+        }
+        
+        .tips-section {
+            background: #e8f5e8;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .tips-section h4 {
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+        
+        .reflection-box {
+            background: #fff3cd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .emergency-kit {
+            background: #f8d7da;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .emergency-kit h4 {
+            color: #dc3545;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+        }
+        
+        .celebration {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            .day-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .time-estimate {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🚀 Plan de Transformación</h1>
+            <p>De Líder Tóxico a Líder Empático en 30 Días<br>
+            <strong>Tu roadmap personalizado hacia el liderazgo excepcional</strong></p>
+        </div>
+
+        <!-- PROGRESS TRACKER -->
+        <div class="progress-tracker">
+            <h3>📊 Tu Progreso</h3>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span>Progreso General:</span>
+                <span id="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #e74c3c;" id="week1-progress">0/7</div>
+                    <div style="font-size: 0.9em; color: #7f8c8d;">Semana 1</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #f39c12;" id="week2-progress">0/7</div>
+                    <div style="font-size: 0.9em; color: #7f8c8d;">Semana 2</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #27ae60;" id="week3-progress">0/7</div>
+                    <div style="font-size: 0.9em; color: #7f8c8d;">Semana 3</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5em; font-weight: bold; color: #3498db;" id="week4-progress">0/7</div>
+                    <div style="font-size: 0.9em; color: #7f8c8d;">Semana 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEMANA 1: FUNDACIÓN -->
+        <div class="week-section">
+            <div class="week-header" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">
+                <h2>🏗️ SEMANA 1: FUNDACIÓN</h2>
+                <p>Estableciendo las bases para tu transformación</p>
+            </div>
+
+            <!-- DÍA 1 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">1</div>
+                    <div class="day-title">Comunicación Transparente con el Equipo</div>
+                    <div class="time-estimate">30 min</div>
+                </div>
+                
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="1">
+                        <div class="activity-content">
+                            <div class="activity-title">Reunión de equipo: Comunicar compromiso de mejora</div>
+                            <div class="activity-description">Script: "He realizado una evaluación de mi liderazgo y me comprometo a mejorar. Valoro su feedback y estaré implementando cambios específicos."</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="1">
+                        <div class="activity-content">
+                            <div class="activity-title">Solicitar feedback honesto <span class="quick-win">Quick Win</span></div>
+                            <div class="activity-description">Pregunta específica: "¿Qué es lo primero que cambiarían de mi estilo de liderazgo?"</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="1">
+                        <div class="activity-content">
+                            <div class="activity-title">Establecer canal de feedback anónimo</div>
+                            <div class="activity-description">Crear buzón físico o digital donde el equipo pueda dar feedback sin temor</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- DÍA 2 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">2</div>
+                    <div class="day-title">Configurar Nuevos Procesos</div>
+                    <div class="time-estimate">45 min</div>
+                </div>
+                
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="2">
+                        <div class="activity-content">
+                            <div class="activity-title">Programar reuniones 1-a-1 semanales</div>
+                            <div class="activity-description">30 minutos por persona, mismo día/hora cada semana. Agenda: 70% escucha, 30% guía</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="2">
+                        <div class="activity-content">
+                            <div class="activity-title">Crear template de agenda 1-a-1</div>
+                            <div class="activity-description">Incluir: progreso personal, obstáculos, necesidades de apoyo, feedback mutuo</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="2">
+                        <div class="activity-content">
+                            <div class="activity-title">Implementar regla "2 preguntas antes de opinar" <span class="quick-win">Quick Win</span></div>
+                            <div class="activity-description">En cada conversación, hacer mínimo 2 preguntas antes de dar tu perspectiva</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- DÍA 3 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">3</div>
+                    <div class="day-title">Identificar Oportunidades de Delegación</div>
+                    <div class="time-estimate">60 min</div>
+                </div>
+                
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="3">
+                        <div class="activity-content">
+                            <div class="activity-title">Auditoría de tareas actuales</div>
+                            <div class="activity-description">Listar todas las tareas que haces y clasificar: Solo yo / Puedo delegar / Debo delegar</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="3">
+                        <div class="activity-content">
+                            <div class="activity-title">Identificar 3 tareas para delegar esta semana</div>
+                            <div class="activity-description">Criterio: Tareas que el equipo puede hacer con 80% de efectividad</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="3">
+                        <div class="activity-content">
+                            <div class="activity-title">Mapear capacidades del equipo</div>
+                            <div class="activity-description">¿Quién puede hacer qué? ¿Qué necesitan para crecer?</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- DÍA 4 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">4</div>
+                    <div class="day-title">Primera Delegación Estratégica</div>
+                    <div class="time-estimate">45 min</div>
+                </div>
+                
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="4">
+                        <div class="activity-content">
+                            <div class="activity-title">Delegar tarea #1 usando framework CLEAR</div>
+                            <div class="activity-description">Collaborative, Limited, Emotional, Appreciable, Refinable - explicar contexto y dar autonomía</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="4">
+                        <div class="activity-content">
+                            <div class="activity-title">Establecer check-in programado (no supervisión reactiva)</div>
+                            <div class="activity-description">Acordar momento específico para revisar progreso - respetar hasta entonces</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="4">
+                        <div class="activity-content">
+                            <div class="activity-title">Practicar frase: "Confío en tu criterio" <span class="quick-win">Quick Win</span></div>
+                            <div class="activity-description">Usar esta frase al menos 3 veces hoy al delegar o consultar</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- DÍA 5 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">5</div>
+                    <div class="day-title">Técnicas de Escucha Activa</div>
+                    <div class="time-estimate">30 min</div>
+                </div>
+                
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="5">
+                        <div class="activity-content">
+                            <div class="activity-title">Practicar técnica del "parafraseo"</div>
+                            <div class="activity-description">Antes de responder, repetir lo que escuchaste: "Si entiendo bien, dices que..."</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="5">
+                        <div class="activity-content">
+                            <div class="activity-title">Implementar pausas de 3 segundos</div>
+                            <div class="activity-description">Antes de responder a cualquier comentario, contar 3 segundos en silencio</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="5">
+                        <div class="activity-content">
+                            <div class="activity-title">Usar preguntas abiertas <span class="quick-win">Quick Win</span></div>
+                            <div class="activity-description">"¿Qué opinas de...?" "¿Cómo te sientes con...?" "¿Qué sugieres para...?"</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- DÍA 6 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">6</div>
+                    <div class="day-title">Autorregulación Emocional</div>
+                    <div class="time-estimate">40 min</div>
+                </div>
+                
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="6">
+                        <div class="activity-content">
+                            <div class="activity-title">Identificar triggers personales</div>
+                            <div class="activity-description">¿Qué situaciones te hacen perder la calma? ¿Cuáles son las señales tempranas?</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="6">
+                        <div class="activity-content">
+                            <div class="activity-title">Técnica respiración 4-7-8</div>
+                            <div class="activity-description">Inhalar 4, retener 7, exhalar 8. Practicar 5 veces cuando sientas estrés</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="6">
+                        <div class="activity-content">
+                            <div class="activity-title">Frase de pausa: "Déjame pensar esto" <span class="quick-win">Quick Win</span></div>
+                            <div class="activity-description">Usar esta frase cuando sientas que vas a reaccionar impulsivamente</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- DÍA 7 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">7</div>
+                    <div class="day-title">Reflexión y Ajuste Semanal</div>
+                    <div class="time-estimate">45 min</div>
+                </div>
+                
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="7">
+                        <div class="activity-content">
+                            <div class="activity-title">Revisar feedback del buzón anónimo</div>
+                            <div class="activity-description">¿Qué está funcionando? ¿Qué necesita ajuste?</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="7">
+                        <div class="activity-content">
+                            <div class="activity-title">Autoevaluación de la semana</div>
+                            <div class="activity-description">Calificar del 1-10: Comunicación, Delegación, Escucha, Control emocional</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="7">
+                        <div class="activity-content">
+                            <div class="activity-title">Planificar ajustes para semana 2</div>
+                            <div class="activity-description">¿Qué 3 cosas harás diferente la próxima semana?</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="milestone">
+                <h3>🎯 Milestone Semana 1</h3>
+                <p>Al completar esta semana habrás establecido las bases de comunicación y comenzado a delegar efectivamente. Tu equipo notará un cambio inmediato en tu apertura al feedback.</p>
+            </div>
+        </div>
+
+        <!-- SEMANA 2: IMPLEMENTACIÓN -->
+        <div class="week-section">
+            <div class="week-header" style="background: linear-gradient(45deg, #f39c12, #e67e22);">
+                <h2>🚀 SEMANA 2: IMPLEMENTACIÓN</h2>
+                <p>Profundizando las nuevas prácticas y hábitos</p>
+            </div>
+
+            <!-- DÍA 8 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">8</div>
+                    <div class="day-title">Feedback Bidireccional</div>
+                    <div class="time-estimate">60 min</div>
+                </div>
+                
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="8">
+                        <div class="activity-content">
+                            <div class="activity-title">Primera ronda de 1-a-1s con nuevo formato</div>
+                            <div class="activity-description">Comenzar con: "¿Cómo estás? ¿Qué necesitas de mí?" Escuchar 15 min antes de hablar</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="8">
+                        <div class="activity-content">
+                            <div class="activity-title">Solicitar feedback sobre cambios implementados</div>
+                            <div class="activity-description">"¿Has notado algún cambio en mi liderazgo esta semana? ¿Qué más puedo mejorar?"</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="8">
+                        <div class="activity-content">
+                            <div class="activity-title">Dar feedback usando técnica SBI <span class="quick-win">Quick Win</span></div>
+                            <div class="activity-description">Situación-Comportamiento-Impacto. Específico, observable, sin juicios</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- DÍA 9 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">9</div>
+                    <div class="day-title">Delegación Avanzada</div>
+                    <div class="time-estimate">50 min</div>
+                </div>
+                
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="9">
+                        <div class="activity-content">
+                            <div class="activity-title">Delegar responsabilidad completa (no solo tarea)</div>
+                            <div class="activity-description">Elegir un proyecto y dar ownership total a un miembro del equipo</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="9">
+                        <div class="activity-content">
+                            <div class="activity-title">Resistir impulso de micromanagear</div>
+                            <div class="activity-description">Cuando sientas ganas de preguntar por progreso, esperar hasta el check-in programado</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <input type="checkbox" class="activity-checkbox" data-day="9">
+                        <div class="activity-content">
+                            <div class="activity-title">Preguntar "¿Cómo puedo ayudarte?" en lugar de "¿Cómo vas?"</div>
+                            <div class="activity-description">Cambio de mentalidad: de supervisor a facilitador</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- DÍA 10 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">10</div>

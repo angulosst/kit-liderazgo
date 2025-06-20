@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación 360° - Sistema Automatizado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .setup-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .setup-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .team-member {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .team-member h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+        
+        .progress-bar {
+            background: #ecf0f1;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        
+        .question-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+        }
+        
+        .question h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .rating-option {
+            text-align: center;
+            flex: 1;
+            margin: 5px;
+            min-width: 80px;
+        }
+        
+        .rating-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .rating-option label {
+            display: block;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        
+        .section-header {
+            background: linear-gradient(45deg, #34495e, #2c3e50);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .anonymous-notice {
+            background: #e8f5e8;
+            border: 2px solid #27ae60;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .anonymous-notice h3 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .results-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .metric-card {
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .metric-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .rating-scale {
+                flex-direction: column;
+            }
+            .rating-option {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SETUP PHASE -->
+        <div id="setup-phase">
+            <div class="header">
+                <h1>🎯 Evaluación 360° Automatizada</h1>
+                <p>Configura tu evaluación en 5 minutos y recibe feedback honesto de tu equipo</p>
+            </div>
+
+            <div class="setup-section">
+                <h2>📋 Paso 1: Información del Líder</h2>
+                
+                <div class="form-group">
+                    <label for="leader-name">Nombre del Líder</label>
+                    <input type="text" id="leader-name" placeholder="Tu nombre completo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="leader-position">Cargo/Posición</label>
+                    <input type="text" id="leader-position" placeholder="Ej: Gerente de Ventas, Director de Operaciones">
+                </div>
+                
+                <div class="form-group">
+                    <label for="company-name">Empresa</label>
+                    <input type="text" id="company-name" placeholder="Nombre de tu empresa">
+                </div>
+                
+                <div class="form-group">
+                    <label for="team-size">Tamaño del Equipo</label>
+                    <select id="team-size">
+                        <option value="">Selecciona...</option>
+                        <option value="2-5">2-5 personas</option>
+                        <option value="6-10">6-10 personas</option>
+                        <option value="11-20">11-20 personas</option>
+                        <option value="21-50">21-50 personas</option>
+                        <option value="50+">Más de 50 personas</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="setup-section">
+                <h2>👥 Paso 2: Configurar Participantes</h2>
+                <p style="margin-bottom: 20px; color: #7f8c8d;">
+                    Agrega los emails de tu equipo. Recibirán una invitación anónima para evaluar tu liderazgo.
+                </p>
+                
+                <div id="team-members">
+                    <div class="team-member">
+                        <h4>Participante 1</h4>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="member-email" placeholder="email@empresa.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Relación</label>
+                            <select class="member-relation">
+                                <option value="subordinado">Subordinado directo</option>
+                                <option value="par">Colega/Par</option>
+                                <option value="superior">Superior</option>
+                                <option value="cliente">Cliente interno</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="addTeamMember()">+ Agregar Participante</button>
+                <button class="btn btn-success" onclick="startEvaluation()">🚀 Iniciar Evaluación</button>
+            </div>
+        </div>
+
+        <!-- EVALUATION PHASE -->
+        <div id="evaluation-phase" class="hidden">
+            <div class="header">
+                <h1>📊 Evaluación de Liderazgo</h1>
+                <p>Tu opinión es anónima y confidencial. Sé honesto para ayudar a tu líder a mejorar.</p>
+            </div>
+
+            <div class="anonymous-notice">
+                <h3>🔒 Evaluación 100% Anónima</h3>
+                <p>Tus respuestas no pueden ser rastreadas. Tu identidad está completamente protegida.</p>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="evaluation-progress"></div>
+            </div>
+            <p style="text-align: center; margin-bottom: 30px;">
+                <span id="current-question">1</span> de <span id="total-questions">25</span> preguntas
+            </p>
+
+            <!-- SECCIÓN 1: COMUNICACIÓN -->
+            <div class="section-header">
+                <h2>💬 Comunicación y Feedback</h2>
+            </div>
+
+            <div class="question-section">
+                <div class="question">
+                    <h3>1. ¿Qué tan claro es este líder al comunicar expectativas y objetivos?</h3>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="q1" value="1" id="q1_1">
+                            <label for="q1_1">Muy confuso</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q1" value="2" id="q1_2">
+                            <label for="q1_2">Algo confuso</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q1" value="3" id="q1_3">
+                            <label for="q1_3">Neutral</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q1" value="4" id="q1_4">
+                            <label for="q1_4">Bastante claro</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q1" value="5" id="q1_5">
+                            <label for="q1_5">Muy claro</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>2. ¿Con qué frecuencia te interrumpe cuando estás explicando algo?</h3>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="q2" value="5" id="q2_1">
+                            <label for="q2_1">Nunca</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q2" value="4" id="q2_2">
+                            <label for="q2_2">Rara vez</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q2" value="3" id="q2_3">
+                            <label for="q2_3">A veces</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q2" value="2" id="q2_4">
+                            <label for="q2_4">Frecuentemente</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q2" value="1" id="q2_5">
+                            <label for="q2_5">Constantemente</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>3. ¿Cómo calificarías el tono que usa cuando da feedback negativo?</h3>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="q3" value="1" id="q3_1">
+                            <label for="q3_1">Agresivo/Hostil</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q3" value="2" id="q3_2">
+                            <label for="q3_2">Áspero</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q3" value="3" id="q3_3">
+                            <label for="q3_3">Neutral</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q3" value="4" id="q3_4">
+                            <label for="q3_4">Respetuoso</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q3" value="5" id="q3_5">
+                            <label for="q3_5">Constructivo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>4. ¿Qué tan abierto está a recibir feedback sobre su liderazgo?</h3>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="q4" value="1" id="q4_1">
+                            <label for="q4_1">Nada abierto</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q4" value="2" id="q4_2">
+                            <label for="q4_2">Poco abierto</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q4" value="3" id="q4_3">
+                            <label for="q4_3">Neutral</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q4" value="4" id="q4_4">
+                            <label for="q4_4">Bastante abierto</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q4" value="5" id="q4_5">
+                            <label for="q4_5">Muy abierto</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>5. ¿Reconoce públicamente los logros del equipo?</h3>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="q5" value="1" id="q5_1">
+                            <label for="q5_1">Nunca</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q5" value="2" id="q5_2">
+                            <label for="q5_2">Rara vez</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q5" value="3" id="q5_3">
+                            <label for="q5_3">A veces</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q5" value="4" id="q5_4">
+                            <label for="q5_4">Frecuentemente</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q5" value="5" id="q5_5">
+                            <label for="q5_5">Siempre</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 2: CONTROL Y DELEGACIÓN -->
+            <div class="section-header">
+                <h2>🎯 Control y Delegación</h2>
+            </div>
+
+            <div class="question-section">
+                <div class="question">
+                    <h3>6. ¿Qué tan seguido revisa tu trabajo en progreso?</h3>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="q6" value="5" id="q6_1">
+                            <label for="q6_1">Solo cuando pregunto</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q6" value="4" id="q6_2">
+                            <label for="q6_2">Semanalmente</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q6" value="3" id="q6_3">
+                            <label for="q6_3">Diariamente</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q6" value="2" id="q6_4">
+                            <label for="q6_4">Varias veces al día</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q6" value="1" id="q6_5">
+                            <label for="q6_5">Constantemente</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>7. Cuando delega tareas, ¿qué tan específico es sobre cómo hacerlas?</h3>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="q7" value="5" id="q7_1">
+                            <label for="q7_1">Da objetivos, me deja decidir cómo</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q7" value="4" id="q7_2">
+                            <label for="q7_2">Da pautas generales</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q7" value="3" id="q7_3">
+                            <label for="q7_3">Especifica algunos pasos</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q7" value="2" id="q7_4">
+                            <label for="q7_4">Dicta paso a paso</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q7" value="1" id="q7_5">
+                            <label for="q7_5">Termina haciéndolo él/ella</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>8. ¿Confía en tu criterio para tomar decisiones en tu área?</h3>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="q8" value="1" id="q8_1">
+                            <label for="q8_1">Nada</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q8" value="2" id="q8_2">
+                            <label for="q8_2">Poco</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q8" value="3" id="q8_3">
+                            <label for="q8_3">Moderadamente</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q8" value="4" id="q8_4">
+                            <label for="q8_4">Bastante</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q8" value="5" id="q8_5">
+                            <label for="q8_5">Completamente</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 3: EMOCIONES Y AMBIENTE -->
+            <div class="section-header">
+                <h2>😊 Emociones y Ambiente Laboral</h2>
+            </div>
+
+            <div class="question-section">
+                <div class="question">
+                    <h3>9. ¿Qué tan predecible es su estado de ánimo en el trabajo?</h3>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="q9" value="1" id="q9_1">
+                            <label for="q9_1">Muy impredecible</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q9" value="2" id="q9_2">
+                            <label for="q9_2">Algo impredecible</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q9" value="3" id="q9_3">
+                            <label for="q9_3">Variable</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q9" value="4" id="q9_4">
+                            <label for="q9_4">Bastante estable</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q9" value="5" id="q9_5">
+                            <label for="q9_5">Muy estable</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>10. Cuando está bajo presión, ¿cómo cambia su trato hacia el equipo?</h3>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="q10" value="1" id="q10_1">
+                            <label for="q10_1">Se vuelve muy difícil</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q10" value="2" id="q10_2">
+                            <label for="q10_2">Se vuelve más exigente</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q10" value="3" id="q10_3">
+                            <label for="q10_3">Cambia un poco</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q10" value="4" id="q10_4">
+                            <label for="q10_4">Se mantiene profesional</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q10" value="5" id="q10_5">
+                            <label for="q10_5">Nos protege del estrés</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>11. ¿Cómo describirías el ambiente cuando entra a una reunión?</h3>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="q11" value="1" id="q11_1">
+                            <label for="q11_1">Tenso y silencioso</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q11" value="2" id="q11_2">
+                            <label for="q11_2">Un poco tenso</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q11" value="3" id="q11_3">
+                            <label for="q11_3">Neutral</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q11" value="4" id="q11_4">
+                            <label for="q11_4">Profesional</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="q11" value="5" id="q11_5">
+                            <label for="q11_5">Relajado y colaborativo</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 40px 0;">
+                <button class="btn btn-success" onclick="submitEvaluation()">✅ Enviar Evaluación</button>
+            </div>
+        </div>
+
+        <!-- RESULTS DASHBOARD -->
+        <div id="results-phase" class="hidden">
+            <div class="header">
+                <h1>📊 Dashboard de Resultados</h1>
+                <p>Análisis completo de tu evaluación 360°</p>
+            </div>
+
+            <div class="results-section">
+                <h2>📈 Resumen Ejecutivo</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="metric-card">
+                        <div class="metric-value" id="overall-score">4.2</div>
+                        <div class="metric-label">Puntuación General (1-5)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="response-rate">87%</div>
+                        <div class="metric-label">Tasa de Respuesta</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="risk-level">Medio</div>
+                        <div class="metric-label">Nivel de Riesgo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <h2>📊 Resultados por Categoría</h2>
+                <canvas id="resultsChart" width="400" height="200"></canvas>
+            </div>
+
+            <div class="results-section">
+                <h2>💡 Recomendaciones Inmediatas</h2>
+                <div id="recommendations"></div>
+            </div>
+
+            <div style="text-align: center; margin: 40px 0;">
+                <button class="btn btn-success" onclick="generateReport()">📄 Generar Reporte Completo</button>
+                <button class="btn" onclick="startNewEvaluation()">🔄 Nueva Evaluación</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPhase = 'setup';
+        let teamMembers = 1;
+        let evaluationData = {};
+        let currentQuestion = 1;
+        let totalQuestions = 11;
+
+        function addTeamMember() {
+            teamMembers++;
+            const container = document.getElementById('team-members');
+            const newMember = document.createElement('div');
+            newMember.className = 'team-member';
+            newMember.innerHTML = `
+                <h4>Participante ${teamMembers}</h4>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="member-email" placeholder="email@empresa.com">
+                </div>
+                <div class="form-group">
+                    <label>Relación</label>
+                    <select class="member-relation">
+                        <option value="subordinado">Subordinado directo</option>
+                        <option value="par">Colega/Par</option>
+                        <option value="superior">Superior</option>
+                        <option value="cliente">Cliente interno</option>
+                    </select>
+                </div>
+                <button class="btn btn-danger" onclick="removeMember(this)">❌ Eliminar</button>
+            `;
+            container.appendChild(newMember);
+        }
+
+        function removeMember(button) {
+            button.parentElement.remove();
+        }
+
+        function startEvaluation() {
+            // Validar datos del líder
+            const leaderName = document.getElementById('leader-name').value;
+            const leaderPosition = document.getElementById('leader-position').value;
+            const companyName = document.getElementById('company-name').value;
+            const teamSize = document.getElementById('team-size').value;
+
+            if (!leaderName || !leaderPosition || !companyName || !teamSize) {
+                alert('Por favor completa todos los campos del líder');
+                return;
+            }
+
+            // Recopilar emails del equipo
+            const emails = Array.from(document.querySelectorAll('.member-email')).map(input => input.value);
+            const validEmails = emails.filter(email => email && email.includes('@'));
+
+            if (validEmails.length === 0) {
+                alert('Agrega al menos un email válido del equipo');
+                return;
+            }
+
+            // Guardar configuración
+            evaluationData.leader = {
+                name: leaderName,
+                position: leaderPosition,
+                company: companyName,
+                teamSize: teamSize
+            };
+
+            evaluationData.participants = validEmails;
+
+            // Simular envío de invitaciones
+            alert(`✅ Invitaciones enviadas a ${validEmails.length} participantes\n\nEn un sistema real, cada participante recibiría un enlace único para evaluar anónimamente.`);
+
+            // Cambiar a fase de evaluación (simulando la vista del evaluador)
+            switchToPhase('evaluation');
+        }
+
+        function switchToPhase(phase) {
+            document.getElementById('setup-phase').classList.add('hidden');
+            document.getElementById('evaluation-phase').classList.add('hidden');
+            document.getElementById('results-phase').classList.add('hidden');
+
+            document.getElementById(`${phase}-phase`).classList.remove('hidden');
+            currentPhase = phase;
+
+            if (phase === 'evaluation') {
+                updateProgress();
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('evaluation-progress').style.width = progress + '%';
+            document.getElementById('current-question').textContent = currentQuestion;
+            document.getElementById('total-questions').textContent = totalQuestions;
+        }
+
+        function submitEvaluation() {
+            // Recopilar respuestas
+            const answers = {};
+            let answeredQuestions = 0;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const answer = document.querySelector(`input[name="q${i}"]:checked`);
+                if (answer) {
+                    answers[`q${i}`] = parseInt(answer.value);
+                    answeredQuestions++;
+                }
+            }
+
+            if (answeredQuestions < totalQuestions) {
+                alert(`Por favor responde todas las preguntas. Te faltan ${totalQuestions - answeredQuestions} preguntas.`);
+                return;
+            }
+
+            // Procesar resultados
+            evaluationData.responses = answers;
+            calculateResults();
+            switchToPhase('results');
+        }
+
+        function calculateResults() {
+            const responses = evaluationData.responses;
+            
+            // Calcular puntuaciones por categoría
+            const categories = {
+                communication: [1, 2, 3, 4, 5], // Preguntas de comunicación
+                control: [6, 7, 8], // Preguntas de control
+                emotions: [9, 10, 11] // Preguntas de emociones
+            };
+
+            const categoryScores = {};
+            let totalScore = 0;
+            let totalQuestions = 0;
+
+            for (const [category, questions] of Object.entries(categories)) {
+                let categorySum = 0;
+                for (const q of questions) {
+                    categorySum += responses[`q${q}`] || 0;
+                    totalQuestions++;
+                }
+                categoryScores[category] = (categorySum / questions.length).toFixed(1);
+                totalScore += categorySum;
+            }
+
+            const overallScore = (totalScore / totalQuestions).toFixed(1);
+
+            // Actualizar dashboard
+            document.getElementById('overall-score').textContent = overallScore;
+            document.getElementById('response-rate').textContent = '100%';
+            
+            // Determinar nivel de riesgo
+            let riskLevel = 'Bajo';
+            if (overallScore < 2.5) riskLevel = 'Alto';
+            else if (overallScore < 3.5) riskLevel = 'Medio';
+            
+            document.getElementById('risk-level').textContent = riskLevel;
+
+            // Generar recomendaciones
+            generateRecommendations(categoryScores, overallScore);
+
+            // Guardar resultados
+            evaluationData.results = {
+                overall: overallScore,
+                categories: categoryScores,
+                risk: riskLevel
+            };
+        }
+
+        function generateRecommendations(scores, overall) {
+            const container = document.getElementById('recommendations');
+            let recommendations = '';
+
+            if (scores.communication < 3) {
+                recommendations += `
+                    <div class="metric-card" style="border-left-color: #e74c3c;">
+                        <h4 style="color: #e74c3c;">🚨 CRÍTICO: Comunicación</h4>
+                        <p>Tu equipo siente que la comunicación es problemática. Prioridad #1:</p>
+                        <ul>
+                            <li>Establece reuniones 1-a-1 semanales</li>
+                            <li>Practica escucha activa sin interrumpir</li>
+                            <li>Pide feedback antes de dar el tuyo</li>
+                        </ul>
+                    </div>
+                `;
+            }
+
+            if (scores.control < 3) {
+                recommendations += `
+                    <div class="metric-card" style="border-left-color: #f39c12;">
+                        <h4 style="color: #f39c12;">⚠️ ATENCIÓN: Micromanagement</h4>
+                        <p>Necesitas delegar más efectivamente:</p>
+                        <ul>
+                            <li>Define objetivos claros, no procesos</li>
+                            <li>Establece check-ins programados</li>
+                            <li>Pregunta "¿Cómo puedo ayudarte?" en vez de revisar</li>
+                        </ul>
+                    </div>
+                `;
+            }
+
+            if (scores.emotions < 3) {
+                recommendations += `
+                    <div class="metric-card" style="border-left-color: #9b59b6;">
+                        <h4 style="color: #9b59b6;">😤 MEJORA: Inteligencia Emocional</h4>
+                        <p>Tu estado emocional afecta al equipo:</p>
+                        <ul>
+                            <li>Practica técnicas de autorregulación</li>
+                            <li>Comunica cuando estés bajo presión</li>
+                            <li>Toma pausas antes de reaccionar</li>
+                        </ul>
+                    </div>
+                `;
+            }
+
+            if (overall >= 4) {
+                recommendations += `
+                    <div class="metric-card" style="border-left-color: #27ae60;">
+                        <h4 style="color: #27ae60;">🎉 FORTALEZAS: Mantener</h4>
+                        <p>¡Excelente liderazgo! Enfócate en:</p>
+                        <ul>
+                            <li>Mantener la consistencia</li>
+                            <li>Seguir pidiendo feedback regular</li>
+                            <li>Mentorear a otros líderes</li>
+                        </ul>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = recommendations || `
+                <div class="metric-card">
+                    <h4>📊 Análisis en Proceso</h4>
+                    <p>Generando recomendaciones personalizadas basadas en tus resultados...</p>
+                </div>
+            `;
+        }
+
+        function generateReport() {
+            alert('🔄 Generando reporte completo...\n\nEn el sistema real, esto:\n\n✅ Crearía un PDF de 15 páginas\n✅ Incluiría gráficos detallados\n✅ Proporcionaría plan de acción\n✅ Se enviaría por email automáticamente');
+        }
+
+        function startNewEvaluation() {
+            if (confirm('¿Estás seguro de que quieres iniciar una nueva evaluación?')) {
+                location.reload();
+            }
+        }
+
+        // Simular datos para demo
+        function loadSampleData() {
+            document.getElementById('leader-name').value = 'Carlos Mendoza';
+            document.getElementById('leader-position').value = 'Gerente de Ventas';
+            document.getElementById('company-name').value = 'TechCorp Solutions';
+            document.getElementById('team-size').value = '6-10';
+            
+            const emails = document.querySelectorAll('.member-email');
+            emails[0].value = 'ana.garcia@techcorp.com';
+        }
+
+        // Auto-cargar datos de ejemplo para demo
+        window.addEventListener('load', function() {
+            setTimeout(loadSampleData, 1000);
+        });
+
+        // Tracking de interacciones
+        document.addEventListener('click', function(e) {
+            if (e.target.type === 'radio') {
+                console.log('Respuesta seleccionada:', e.target.name, e.target.value);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Métricas de Liderazgo - BONUS Exclusivo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .dashboard-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+        
+        .dashboard-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .dashboard-header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #3498db;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .metric-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .metric-icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+        }
+        
+        .metric-info h3 {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        
+        .metric-info p {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .metric-value {
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .metric-trend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        .trend-up {
+            color: #27ae60;
+        }
+        
+        .trend-down {
+            color: #e74c3c;
+        }
+        
+        .trend-stable {
+            color: #f39c12;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .chart-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .chart-subtitle {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .chart-placeholder {
+            height: 300px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 1.1em;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .progress-ring {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .progress-ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring circle {
+            fill: transparent;
+            stroke-width: 8;
+            stroke-linecap: round;
+        }
+        
+        .progress-ring .background {
+            stroke: #ecf0f1;
+        }
+        
+        .progress-ring .progress {
+            stroke: #3498db;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 2s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .alert-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .alert-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid;
+        }
+        
+        .alert-critical {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .alert-warning {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+            color: #856404;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+        
+        .alert-icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .team-member {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .member-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+        
+        .member-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .member-satisfaction {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .satisfaction-high {
+            color: #27ae60;
+        }
+        
+        .satisfaction-medium {
+            color: #f39c12;
+        }
+        
+        .satisfaction-low {
+            color: #e74c3c;
+        }
+        
+        .filters-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .filter-group label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .filter-group select {
+            padding: 8px 15px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            background: white;
+            color: #2c3e50;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+        }
+        
+        .insights-panel {
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .insight-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-header h1 {
+                font-size: 2em;
+            }
+            .filters-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- HEADER -->
+        <div class="dashboard-header">
+            <h1>📊 Dashboard de Métricas de Liderazgo</h1>
+            <p>Monitoreo en tiempo real de tu progreso y el clima de tu equipo</p>
+            <div style="margin-top: 20px; font-size: 0.9em; opacity: 0.9;">
+                🔄 Actualizado cada hora • 📈 Datos de los últimos 30 días • 🎯 6 métricas clave
+            </div>
+        </div>
+
+        <!-- FILTROS -->
+        <div class="filters-bar">
+            <div class="filter-group">
+                <label>📅 Período:</label>
+                <select id="period-filter" onchange="updateDashboard()">
+                    <option value="7d">Últimos 7 días</option>
+                    <option value="30d" selected>Últimos 30 días</option>
+                    <option value="90d">Últimos 90 días</option>
+                    <option value="1y">Último año</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>👥 Equipo:</label>
+                <select id="team-filter" onchange="updateDashboard()">
+                    <option value="all">Todo el equipo</option>
+                    <option value="direct">Reportes directos</option>
+                    <option value="new">Nuevos miembros</option>
+                    <option value="senior">Miembros senior</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>📊 Vista:</label>
+                <select id="view-filter" onchange="updateDashboard()">
+                    <option value="summary">Resumen</option>
+                    <option value="detailed">Detallado</option>
+                    <option value="trends">Tendencias</option>
+                </select>
+            </div>
+            
+            <button class="btn" onclick="exportData()">📥 Exportar</button>
+            <button class="btn btn-success" onclick="generateReport()">📋 Generar Reporte</button>
+        </div>
+
+        <!-- MÉTRICAS PRINCIPALES -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon">😊</div>
+                    <div class="metric-info">
+                        <h3>Satisfacción del Equipo</h3>
+                        <p>Promedio semanal (escala 1-5)</p>
+                    </div>
+                </div>
+                <div class="metric-value" style="color: #27ae60;">4.2</div>
+                <div class="metric-trend trend-up">
+                    ↗️ +0.3 vs. semana anterior
+                </div>
+                <div class="progress-ring">
+                    <svg>
+                        <circle class="background" cx="60" cy="60" r="45"></circle>
+                        <circle class="progress" cx="60" cy="60" r="45" style="stroke-dashoffset: 56.6;"></circle>
+                    </svg>
+                    <div class="progress-text">84%</div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon">🚪</div>
+                    <div class="metric-info">
+                        <h3>Riesgo de Rotación</h3>
+                        <p>Probabilidad de renuncia (%)</p>
+                    </div>
+                </div>
+                <div class="metric-value" style="color: #f39c12;">18%</div>
+                <div class="metric-trend trend-down">
+                    ↘️ -5% vs. mes anterior
+                </div>
+                <div style="margin-top: 15px;">
+                    <small style="color: #7f8c8d;">Menos micromanagement</small>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon">🌟</div>
+                    <div class="metric-info">
+                        <h3>NPS de Liderazgo</h3>
+                        <p>Net Promoter Score interno</p>
+                    </div>
+                </div>
+                <div class="metric-value" style="color: #27ae60;">+42</div>
+                <div class="metric-trend trend-up">
+                    ↗️ +18 puntos vs. baseline
+                </div>
+                <div style="margin-top: 15px;">
+                    <small style="color: #7f8c8d;">6 promotores, 2 neutros</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- ALERTAS Y RECOMENDACIONES -->
+        <div class="alert-panel">
+            <h2 style="color: #2c3e50; margin-bottom: 25px;">🚨 Alertas y Recomendaciones</h2>
+            
+            <div class="alert-item alert-success">
+                <div class="alert-icon">✅</div>
+                <div>
+                    <strong>Excelente progreso:</strong> La satisfacción del equipo ha aumentado 15% este mes. 
+                    Continúa con las reuniones 1-a-1 semanales.
+                </div>
+            </div>
+            
+            <div class="alert-item alert-warning">
+                <div class="alert-icon">⚠️</div>
+                <div>
+                    <strong>Atención necesaria:</strong> Ana García muestra señales de desmotivación. 
+                    Programa una conversación individual esta semana.
+                </div>
+            </div>
+            
+            <div class="alert-item alert-critical">
+                <div class="alert-icon">🚨</div>
+                <div>
+                    <strong>Acción urgente:</strong> Carlos Mendoza ha faltado 2 reuniones seguidas. 
+                    Posible riesgo de renuncia. <button class="btn btn-warning" onclick="scheduleIntervention()">Intervenir Ahora</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- GRÁFICOS DE TENDENCIAS -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <div>
+                    <h3 class="chart-title">📈 Evolución de Métricas Clave</h3>
+                    <p class="chart-subtitle">Últimos 90 días - Progreso de tu transformación</p>
+                </div>
+            </div>
+            <div class="chart-placeholder">
+                📊 Gráfico de líneas mostrando evolución de satisfacción, productividad y comunicación
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+            <div class="chart-container">
+                <h3 class="chart-title">🎯 Distribución de Feedback</h3>
+                <p class="chart-subtitle">Tipos de feedback dado esta semana</p>
+                <div class="chart-placeholder">
+                    🥧 Gráfico circular: 45% Positivo, 35% Constructivo, 20% Coaching
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="chart-title">⏰ Tiempo en Reuniones 1-a-1</h3>
+                <p class="chart-subtitle">Minutos por persona esta semana</p>
+                <div class="chart-placeholder">
+                    📊 Gráfico de barras por miembro del equipo
+                </div>
+            </div>
+        </div>
+
+        <!-- ANÁLISIS POR MIEMBRO DEL EQUIPO -->
+        <div class="chart-container">
+            <h2 style="color: #2c3e50; margin-bottom: 25px;">👥 Análisis Individual del Equipo</h2>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">AG</div>
+                    <div class="member-name">Ana García</div>
+                    <div class="member-satisfaction satisfaction-medium">3.2</div>
+                    <div style="font-size: 0.9em; color: #7f8c8d;">Desarrolladora Senior</div>
+                    <div style="margin-top: 10px;">
+                        <div style="font-size: 0.8em; color: #f39c12;">⚠️ Requiere atención</div>
+                        <button class="btn" style="margin-top: 10px;" onclick="viewProfile('ana')">Ver Perfil</button>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">CM</div>
+                    <div class="member-name">Carlos Mendoza</div>
+                    <div class="member-satisfaction satisfaction-low">2.8</div>
+                    <div style="font-size: 0.9em; color: #7f8c8d;">Analista de Datos</div>
+                    <div style="margin-top: 10px;">
+                        <div style="font-size: 0.8em; color: #e74c3c;">🚨 Riesgo alto</div>
+                        <button class="btn btn-warning" style="margin-top: 10px;" onclick="viewProfile('carlos')">Acción Urgente</button>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">MR</div>
+                    <div class="member-name">María Rodríguez</div>
+                    <div class="member-satisfaction satisfaction-high">4.6</div>
+                    <div style="font-size: 0.9em; color: #7f8c8d;">Project Manager</div>
+                    <div style="margin-top: 10px;">
+                        <div style="font-size: 0.8em; color: #27ae60;">✅ Excelente</div>
+                        <button class="btn btn-success" style="margin-top: 10px;" onclick="viewProfile('maria')">Ver Detalles</button>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">JL</div>
+                    <div class="member-name">Juan López</div>
+                    <div class="member-satisfaction satisfaction-high">4.1</div>
+                    <div style="font-size: 0.9em; color: #7f8c8d;">Diseñador UX</div>
+                    <div style="margin-top: 10px;">
+                        <div style="font-size: 0.8em; color: #27ae60;">✅ Muy bien</div>
+                        <button class="btn" style="margin-top: 10px;" onclick="viewProfile('juan')">Ver Perfil</button>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">SP</div>
+                    <div class="member-name">Sandra Pérez</div>
+                    <div class="member-satisfaction satisfaction-medium">3.7</div>
+                    <div style="font-size: 0.9em; color: #7f8c8d;">Marketing Specialist</div>
+                    <div style="margin-top: 10px;">
+                        <div style="font-size: 0.8em; color: #f39c12;">📈 Mejorando</div>
+                        <button class="btn" style="margin-top: 10px;" onclick="viewProfile('sandra')">Ver Progreso</button>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">DR</div>
+                    <div class="member-name">David Ruiz</div>
+                    <div class="member-satisfaction satisfaction-high">4.4</div>
+                    <div style="font-size: 0.9em; color: #7f8c8d;">Sales Representative</div>
+                    <div style="margin-top: 10px;">
+                        <div style="font-size: 0.8em; color: #27ae60;">✅ Muy satisfecho</div>
+                        <button class="btn" style="margin-top: 10px;" onclick="viewProfile('david')">Ver Perfil</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INSIGHTS AUTOMÁTICOS -->
+        <div class="insights-panel">
+            <h2 style="text-align: center; margin-bottom: 25px;">🧠 Insights Automáticos de IA</h2>
+            <p style="text-align: center; margin-bottom: 30px; opacity: 0.9;">
+                Análisis inteligente de patrones y recomendaciones personalizadas
+            </p>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4 style="margin-bottom: 15px;">🎯 Patrón Identificado</h4>
+                    <p>Tus reuniones 1-a-1 los lunes generan 23% más satisfacción que otros días. 
+                    Considera programar todas las reuniones importantes al inicio de semana.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h4 style="margin-bottom: 15px;">💡 Oportunidad de Mejora</h4>
+                    <p>Los miembros con menos de 6 meses en el equipo muestran 15% menos satisfacción. 
+                    Implementa un programa de onboarding mejorado.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h4 style="margin-bottom: 15px;">🏆 Fortaleza Detectada</h4>
+                    <p>Tu feedback positivo específico ha aumentado la productividad en 18%. 
+                    Continúa usando la metodología SBI-I aprendida en la masterclass.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h4 style="margin-bottom: 15px;">📈 Predicción</h4>
+                    <p>Si mantienes este ritmo de mejora, tu NPS de liderazgo alcanzará +60 en los próximos 45 días, 
+                    ubicándote en el top 10% de líderes.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h4 style="margin-bottom: 15px;">⚠️ Alerta Preventiva</h4>
+                    <p>Detectamos que el estrés del equipo aumenta los viernes. 
+                    Considera reducir deadlines o reuniones los viernes por la tarde.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h4 style="margin-bottom: 15px;">🔄 Recomendación IA</h4>
+                    <p>Basado en equipos similares, implementar "feedback Fridays" podría aumentar 
+                    tu satisfacción de equipo en 12% adicional.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACCIONES RÁPIDAS -->
+        <div style="background: white; padding: 30px; border-radius: 15px; margin: 30px 0; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+            <h2 style="color: #2c3e50; text-align: center; margin-bottom: 25px;">⚡ Acciones Rápidas</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div style="font-size: 2em; margin-bottom: 10px;">📅</div>
+                    <h4>Programar 1-a-1</h4>
+                    <p style="margin: 10px 0; color: #7f8c8d;">Agenda reunión individual</p>
+                    <button class="btn" onclick="schedule1on1()">Programar</button>
+                </div>
+                
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div style="font-size: 2em; margin-bottom: 10px;">📝</div>
+                    <h4>Enviar Feedback</h4>
+                    <p style="margin: 10px 0; color: #7f8c8d;">Feedback rápido a alguien</p>
+                    <button class="btn" onclick="sendFeedback()">Enviar</button>
+                </div>
+                
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div style="font-size: 2em; margin-bottom: 10px;">📊</div>
+                    <h4>Pulso Rápido</h4>
+                    <p style="margin: 10px 0; color: #7f8c8d;">Encuesta de 2 minutos</p>
+                    <button class="btn" onclick="quickPulse()">Lanzar</button>
+                </div>
+                
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div style="font-size: 2em; margin-bottom: 10px;">🎯</div>
+                    <h4>Revisar Plan 30 Días</h4>
+                    <p style="margin: 10px 0; color: #7f8c8d;">Ver progreso del plan</p>
+                    <button class="btn" onclick="reviewPlan()">Revisar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONFIGURACIÓN -->
+        <div style="background: white; padding: 30px; border-radius: 15px; margin: 30px 0; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+            <h2 style="color: #2c3e50; margin-bottom: 25px;">⚙️ Configuración del Dashboard</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                <div>
+                    <h4 style="margin-bottom: 15px;">📧 Alertas por Email</h4>
+                    <label style="display: flex; align-items: center; margin: 10px 0;">
+                        <input type="checkbox" checked style="margin-right: 10px;">
+                        Alerta cuando satisfacción baje de 3.5
+                    </label>
+                    <label style="display: flex; align-items: center; margin: 10px 0;">
+                        <input type="checkbox" checked style="margin-right: 10px;">
+                        Resumen semanal automático
+                    </label>
+                    <label style="display: flex; align-items: center; margin: 10px 0;">
+                        <input type="checkbox" style="margin-right: 10px;">
+                        Recomendaciones de IA diarias
+                    </label>
+                </div>
+                
+                <div>
+                    <h4 style="margin-bottom: 15px;">🔔 Notificaciones Push</h4>
+                    <label style="display: flex; align-items: center; margin: 10px 0;">
+                        <input type="checkbox" checked style="margin-right: 10px;">
+                        Recordatorios de reuniones 1-a-1
+                    </label>
+                    <label style="display: flex; align-items: center; margin: 10px 0;">
+                        <input type="checkbox" style="margin-right: 10px;">
+                        Sugerencias de feedback en tiempo real
+                    </label>
+                    <label style="display: flex; align-items: center; margin: 10px 0;">
+                        <input type="checkbox" checked style="margin-right: 10px;">
+                        Alertas de riesgo de rotación
+                    </label>
+                </div>
+                
+                <div>
+                    <h4 style="margin-bottom: 15px;">📊 Frecuencia de Datos</h4>
+                    <select style="width: 100%; padding: 10px; margin: 10px 0; border: 2px solid #ecf0f1; border-radius: 8px;">
+                        <option>Actualización cada hora</option>
+                        <option>Actualización cada 4 horas</option>
+                        <option>Actualización diaria</option>
+                    </select>
+                    <button class="btn" onclick="saveSettings()">Guardar Configuración</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos simulados para demostración
+        let dashboardData = {
+            satisfaction: 4.2,
+            turnoverRisk: 18,
+            productivity: 112,
+            communication: 3.8,
+            autonomy: 73,
+            nps: 42
+        };
+
+        // Función para actualizar dashboard
+        function updateDashboard() {
+            const period = document.getElementById('period-filter').value;
+            const team = document.getElementById('team-filter').value;
+            const view = document.getElementById('view-filter').value;
+            
+            console.log(`Actualizando dashboard: ${period}, ${team}, ${view}`);
+            
+            // Simular carga de datos
+            setTimeout(() => {
+                alert(`📊 Dashboard actualizado\n\nPeríodo: ${period}\nEquipo: ${team}\nVista: ${view}\n\nEn el sistema real, esto cargaría datos en tiempo real desde la base de datos.`);
+            }, 500);
+        }
+
+        // Funciones de acción
+        function scheduleIntervention() {
+            alert('🚨 Programando Intervención Urgente\n\nSe ha programado:\n✅ Reunión con Carlos para hoy a las 3 PM\n✅ Notificación a RRHH\n✅ Plan de retención activado\n✅ Seguimiento diario los próximos 7 días');
+        }
+
+        function viewProfile(member) {
+            const profiles = {
+                'ana': 'Ana García - Desarrolladora Senior\n\n📊 Satisfacción: 3.2/5\n📈 Tendencia: Estable\n💡 Último feedback: Hace 3 días\n⚠️ Área de atención: Carga de trabajo',
+                'carlos': 'Carlos Mendoza - Analista de Datos\n\n📊 Satisfacción: 2.8/5\n📉 Tendencia: Bajando\n💡 Último feedback: Hace 8 días\n🚨 RIESGO ALTO de renuncia',
+                'maria': 'María Rodríguez - Project Manager\n\n📊 Satisfacción: 4.6/5\n📈 Tendencia: Mejorando\n💡 Último feedback: Ayer\n✅ Todo excelente',
+                'juan': 'Juan López - Diseñador UX\n\n📊 Satisfacción: 4.1/5\n📈 Tendencia: Estable alto\n💡 Último feedback: Hace 2 días\n✅ Muy comprometido',
+                'sandra': 'Sandra Pérez - Marketing Specialist\n\n📊 Satisfacción: 3.7/5\n📈 Tendencia: Mejorando\n💡 Último feedback: Hace 1 día\n📈 En progreso positivo',
+                'david': 'David Ruiz - Sales Representative\n\n📊 Satisfacción: 4.4/5\n📈 Tendencia: Estable alto\n💡 Último feedback: Hace 1 día\n✅ Muy satisfecho'
+            };
+            
+            alert(`👤 Perfil Individual\n\n${profiles[member]}\n\nEn el sistema real, esto abriría una vista detallada con historial completo, métricas específicas y plan de acción personalizado.`);
+        }
+
+        function schedule1on1() {
+            alert('📅 Programando Reunión 1-a-1\n\nEn el sistema real, esto:\n✅ Abriría tu calendario\n✅ Sugeriría horarios óptimos\n✅ Enviaría invitación automática\n✅ Incluiría agenda sugerida basada en datos');
+        }
+
+        function sendFeedback() {
+            alert('📝 Enviando Feedback\n\nEn el sistema real, esto:\n✅ Abriría formulario inteligente\n✅ Sugeriría tipo de feedback según contexto\n✅ Incluiría templates SBI-I\n✅ Tracking automático del impacto');
+        }
+
+        function quickPulse() {
+            alert('📊 Lanzando Pulso Rápido\n\nEncuesta de 2 minutos enviada a:\n✅ Ana García\n✅ Carlos Mendoza\n✅ María Rodríguez\n✅ Juan López\n✅ Sandra Pérez\n✅ David Ruiz\n\nResultados en tiempo real en 1-2 horas.');
+        }
+
+        function reviewPlan() {
+            alert('🎯 Revisando Plan de 30 Días\n\n📈 Progreso actual: 67%\n✅ Completadas: 20/30 actividades\n📅 Días restantes: 10\n🎯 Próxima actividad: Implementar feedback bidireccional\n\n¿Quieres ver el plan completo?');
+        }
+
+        function exportData() {
+            alert('📥 Exportando Datos\n\nGenerando reporte con:\n✅ Métricas de los últimos 30 días\n✅ Gráficos y tendencias\n✅ Análisis por miembro\n✅ Recomendaciones de IA\n\nFormato: Excel + PDF\nDescarga comenzará en 30 segundos.');
+        }
+
+        function generateReport() {
+            alert('📋 Generando Reporte Ejecutivo\n\nCreando reporte profesional con:\n✅ Resumen ejecutivo\n✅ Métricas clave y tendencias\n✅ Análisis de riesgos\n✅ Plan de acción recomendado\n✅ Comparación con benchmarks\n\nListo en 2-3 minutos.');
+        }
+
+        function saveSettings() {
+            alert('⚙️ Configuración Guardada\n\n✅ Alertas por email actualizadas\n✅ Notificaciones push configuradas\n✅ Frecuencia de datos establecida\n\nTodos los cambios están activos inmediatamente.');
+        }
+
+        // Simulación de datos en tiempo real
+        function updateRealTimeData() {
+            // Simular pequeños cambios en las métricas
+            dashboardData.satisfaction += (Math.random() - 0.5) * 0.1;
+            dashboardData.turnoverRisk += (Math.random() - 0.5) * 2;
+            dashboardData.productivity += (Math.random() - 0.5) * 3;
+            
+            // Mantener valores en rangos realistas
+            dashboardData.satisfaction = Math.max(1, Math.min(5, dashboardData.satisfaction));
+            dashboardData.turnoverRisk = Math.max(0, Math.min(100, dashboardData.turnoverRisk));
+            dashboardData.productivity = Math.max(50, Math.min(150, dashboardData.productivity));
+            
+            console.log('Datos actualizados:', dashboardData);
+        }
+
+        // Actualizar datos cada 5 minutos (simulado)
+        setInterval(updateRealTimeData, 300000);
+
+        // Analytics y tracking
+        console.log('Dashboard de Métricas cargado exitosamente');
+        console.log('Conectado a:', new Date().toISOString());
+        console.log('Usuario activo - métricas en tiempo real activadas');
+
+        // Simular notificaciones en tiempo real
+        setTimeout(() => {
+            if (Math.random() > 0.7) {
+                console.log('🔔 Nueva notificación: Mejora detectada en comunicación del equipo');
+            }
+        }, 10000);
+    </script>
+</body>
+</html>color: #7f8c8d;">2 personas en riesgo medio</small>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-info">
+                        <h3>Productividad</h3>
+                        <p>Índice vs. baseline</p>
+                    </div>
+                </div>
+                <div class="metric-value" style="color: #3498db;">112%</div>
+                <div class="metric-trend trend-up">
+                    ↗️ +7% vs. mes anterior
+                </div>
+                <div style="margin-top: 15px;">
+                    <small style="color: #7f8c8d;">Superando objetivos</small>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon">💬</div>
+                    <div class="metric-info">
+                        <h3>Calidad de Comunicación</h3>
+                        <p>Evaluación del equipo (1-5)</p>
+                    </div>
+                </div>
+                <div class="metric-value" style="color: #9b59b6;">3.8</div>
+                <div class="metric-trend trend-up">
+                    ↗️ +0.4 vs. evaluación anterior
+                </div>
+                <div style="margin-top: 15px;">
+                    <small style="color: #7f8c8d;">En mejora constante</small>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon">🎯</div>
+                    <div class="metric-info">
+                        <h3>Autonomía del Equipo</h3>
+                        <p>Decisiones independientes (%)</p>
+                    </div>
+                </div>
+                <div class="metric-value" style="color: #e67e22;">73%</div>
+                <div class="metric-trend trend-up">
+                    ↗️ +12% vs. inicio del plan
+                </div>
+                <div style="margin-top: 15px;">
+                    <small style="

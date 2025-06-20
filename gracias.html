@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Bienvenido al Kit de Supervivencia para Líderes!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .celebration-header {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(39, 174, 96, 0.3);
+            animation: celebrationPulse 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes celebrationPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+        
+        .celebration-header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .celebration-header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+        
+        .access-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .access-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .access-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .access-icon {
+            font-size: 2.5em;
+            margin-right: 20px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .access-title h3 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+        
+        .access-title p {
+            color: #7f8c8d;
+            font-size: 1em;
+        }
+        
+        .value-badge {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-left: auto;
+        }
+        
+        .access-button {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 10px 10px 0;
+            font-weight: bold;
+        }
+        
+        .access-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .access-button.premium {
+            background: linear-gradient(45df, #9b59b6, #8e44ad);
+        }
+        
+        .access-button.premium:hover {
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.4);
+        }
+        
+        .bonus-section {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .bonus-card {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .bonus-card h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .bonus-value {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .next-steps {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin: 15px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .step-number {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            font-size: 1.2em;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        
+        .step-description {
+            color: #7f8c8d;
+            font-size: 0.95em;
+        }
+        
+        .support-section {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .contact-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .testimonial-preview {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.1em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #27ae60;
+        }
+        
+        .progress-tracker {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .progress-bar {
+            background: #ecf0f1;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            height: 100%;
+            width: 0%;
+            transition: width 2s ease;
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .celebration-header h1 {
+                font-size: 2.2em;
+            }
+            .celebration-header {
+                padding: 40px 20px;
+            }
+            .access-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .access-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- CELEBRATION HEADER -->
+        <div class="celebration-header">
+            <h1>🎉 ¡FELICITACIONES!</h1>
+            <p><strong>Has tomado la decisión más importante para tu carrera como líder</strong></p>
+            <p>Tu Kit de Supervivencia está listo. ¡Empecemos tu transformación!</p>
+            <div style="margin-top: 20px; font-size: 0.9em; opacity: 0.9;">
+                ✅ Pago procesado exitosamente • ✅ Acceso inmediato activado • ✅ Soporte incluido
+            </div>
+        </div>
+
+        <!-- ACCESO INMEDIATO -->
+        <div class="access-card">
+            <div class="access-header">
+                <div class="access-icon">📊</div>
+                <div class="access-title">
+                    <h3>1. Evaluación 360° Automatizada</h3>
+                    <p>Comienza con tu evaluación completa del equipo</p>
+                </div>
+                <div class="value-badge">Valor: $197</div>
+            </div>
+            <p style="margin-bottom: 20px; color: #7f8c8d;">
+                Sistema completo que recolecta feedback anónimo de tu equipo. En 20 minutos sabrás exactamente qué piensan de ti como líder.
+            </p>
+            <a href="evaluacion360.html" class="access-button">🚀 Iniciar Evaluación 360°</a>
+            <a href="#" onclick="downloadGuide('360')" class="access-button">📥 Descargar Guía PDF</a>
+        </div>
+
+        <div class="access-card">
+            <div class="access-header">
+                <div class="access-icon">📋</div>
+                <div class="access-title">
+                    <h3>2. Reporte Personalizado (10 Páginas)</h3>
+                    <p>Tu análisis completo con benchmarks y plan de acción</p>
+                </div>
+                <div class="value-badge">Valor: $97</div>
+            </div>
+            <p style="margin-bottom: 20px; color: #7f8c8d;">
+                Reporte profesional con tu análisis detallado, comparación con otros líderes y recomendaciones específicas para tu situación.
+            </p>
+            <a href="reporte-personalizado.html" class="access-button">📊 Ver Mi Reporte</a>
+            <a href="#" onclick="generatePDF('reporte')" class="access-button">📄 Generar PDF</a>
+        </div>
+
+        <div class="access-card">
+            <div class="access-header">
+                <div class="access-icon">🗓️</div>
+                <div class="access-title">
+                    <h3>3. Plan de Transformación (30 Días)</h3>
+                    <p>Tu roadmap día a día hacia el liderazgo empático</p>
+                </div>
+                <div class="value-badge">Valor: $197</div>
+            </div>
+            <p style="margin-bottom: 20px; color: #7f8c8d;">
+                Estrategia paso a paso para eliminar comportamientos tóxicos y desarrollar liderazgo empático. Con acciones diarias específicas y tracking de progreso.
+            </p>
+            <a href="plan-30-dias.html" class="access-button">🎯 Comenzar Mi Plan</a>
+            <a href="#" onclick="downloadCalendar()" class="access-button">📅 Agregar a Calendario</a>
+        </div>
+
+        <div class="access-card">
+            <div class="access-header">
+                <div class="access-icon">🛠️</div>
+                <div class="access-title">
+                    <h3>4. Kit de Herramientas (20+ Templates)</h3>
+                    <p>Scripts, templates y checklists listos para usar</p>
+                </div>
+                <div class="value-badge">Valor: $97</div>
+            </div>
+            <p style="margin-bottom: 20px; color: #7f8c8d;">
+                20+ herramientas prácticas: scripts para conversaciones difíciles, templates de feedback, checklist de autoevaluación diaria y más.
+            </p>
+            <a href="kit-herramientas.html" class="access-button">🛠️ Acceder al Kit</a>
+            <a href="#" onclick="downloadAllTools()" class="access-button">📦 Descargar Todo</a>
+        </div>
+
+        <div class="access-card">
+            <div class="access-header">
+                <div class="access-icon">📱</div>
+                <div class="access-title">
+                    <h3>5. Coaching por WhatsApp (7 Días)</h3>
+                    <p>Acompañamiento personal durante tu primera semana</p>
+                </div>
+                <div class="value-badge">Valor: $197</div>
+            </div>
+            <p style="margin-bottom: 20px; color: #7f8c8d;">
+                Recibirás mensajes diarios personalizados, respuestas a tus dudas y motivación constante durante los primeros 7 días más críticos.
+            </p>
+            <a href="#" onclick="activateWhatsApp()" class="access-button">📱 Activar WhatsApp</a>
+            <a href="#" onclick="scheduleCall()" class="access-button">📞 Agendar Llamada</a>
+        </div>
+
+        <!-- BONUS EXCLUSIVOS -->
+        <div class="bonus-section">
+            <h2 style="margin-bottom: 20px;">🎁 TUS BONUS EXCLUSIVOS</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">
+                Como compraste hoy, recibes estos 3 bonus valorados en $291 USD ¡GRATIS!
+            </p>
+            
+            <div class="bonus-grid">
+                <div class="bonus-card">
+                    <h4>🆘 BONUS 1: Manual de Crisis</h4>
+                    <div class="bonus-value">Valor: $67</div>
+                    <p>Qué hacer cuando tu equipo ya perdió la confianza. Plan de rescate en 72 horas para situaciones críticas.</p>
+                    <a href="bonus-manual-crisis.html" class="access-button" style="margin-top: 15px;">🆘 Acceder Ahora</a>
+                </div>
+                
+                <div class="bonus-card">
+                    <h4>🎤 BONUS 2: Masterclass Feedback</h4>
+                    <div class="bonus-value">Valor: $97</div>
+                    <p>Video exclusivo de 45 minutos: Cómo dar feedback que motive en vez de destruir. Con ejemplos reales.</p>
+                    <a href="bonus-masterclass.html" class="access-button" style="margin-top: 15px;">🎥 Ver Masterclass</a>
+                </div>
+                
+                <div class="bonus-card">
+                    <h4>📊 BONUS 3: Dashboard Métricas</h4>
+                    <div class="bonus-value">Valor: $127</div>
+                    <p>Herramienta web para trackear tu progreso: clima laboral, satisfacción del equipo y productividad en tiempo real.</p>
+                    <a href="bonus-dashboard.html" class="access-button" style="margin-top: 15px;">📈 Abrir Dashboard</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRÓXIMOS PASOS -->
+        <div class="next-steps">
+            <h2 style="color: #2c3e50; margin-bottom: 30px; text-align: center;">🎯 Tus Próximos Pasos (Primeras 24 Horas)</h2>
+            
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">Comienza con la Evaluación 360°</div>
+                    <div class="step-description">Invita a tu equipo a evaluar tu liderazgo. Es anónimo y toma solo 10 minutos por persona.</div>
+                </div>
+            </div>
+            
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">Revisa tu Reporte Personalizado</div>
+                    <div class="step-description">Analiza tus fortalezas y áreas de mejora. Identifica las 3 prioridades principales.</div>
+                </div>
+            </div>
+            
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">Activa el Plan de 30 Días</div>
+                    <div class="step-description">Comienza con el Día 1: Comunicación transparente con tu equipo sobre tu compromiso de mejora.</div>
+                </div>
+            </div>
+            
+            <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-title">Descarga el Kit de Herramientas</div>
+                    <div class="step-description">Familiarízate con los templates y scripts. Imprime los que usarás mañana.</div>
+                </div>
+            </div>
+            
+            <div class="step-item">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <div class="step-title">Activa el Coaching por WhatsApp</div>
+                    <div class="step-description">Conecta con nosotros para recibir tu primer mensaje de motivación y la guía del día 1.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROGRESS TRACKER -->
+        <div class="progress-tracker">
+            <h3 style="color: #2c3e50; margin-bottom: 20px; text-align: center;">📈 Tracker de Progreso Personal</h3>
+            <p style="text-align: center; color: #7f8c8d; margin-bottom: 20px;">
+                Marca como completado cada paso de tu transformación
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div style="text-align: center;">
+                    <input type="checkbox" id="step1" style="transform: scale(1.5); margin-bottom: 10px;" onchange="updateProgress()">
+                    <label for="step1" style="display: block; font-size: 0.9em;">Evaluación 360° iniciada</label>
+                </div>
+                <div style="text-align: center;">
+                    <input type="checkbox" id="step2" style="transform: scale(1.5); margin-bottom: 10px;" onchange="updateProgress()">
+                    <label for="step2" style="display: block; font-size: 0.9em;">Reporte revisado</label>
+                </div>
+                <div style="text-align: center;">
+                    <input type="checkbox" id="step3" style="transform: scale(1.5); margin-bottom: 10px;" onchange="updateProgress()">
+                    <label for="step3" style="display: block; font-size: 0.9em;">Plan Día 1 ejecutado</label>
+                </div>
+                <div style="text-align: center;">
+                    <input type="checkbox" id="step4" style="transform: scale(1.5); margin-bottom: 10px;" onchange="updateProgress()">
+                    <label for="step4" style="display: block; font-size: 0.9em;">Kit descargado</label>
+                </div>
+                <div style="text-align: center;">
+                    <input type="checkbox" id="step5" style="transform: scale(1.5); margin-bottom: 10px;" onchange="updateProgress()">
+                    <label for="step5" style="display: block; font-size: 0.9em;">WhatsApp activado</label>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span>Tu Progreso:</span>
+                    <span id="progress-text">0% Completado</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOPORTE -->
+        <div class="support-section">
+            <h2 style="margin-bottom: 20px;">🤝 Tu Soporte Personal</h2>
+            <p style="font-size: 1.1em; margin-bottom: 30px;">
+                No estás solo en esta transformación. Estamos aquí para apoyarte cada paso del camino.
+            </p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div style="font-size: 2em; margin-bottom: 10px;">📱</div>
+                    <h4>WhatsApp Directo</h4>
+                    <p>+57 XXX XXX XXXX</p>
+                    <p style="font-size: 0.9em; opacity: 0.9;">Respuesta en 2-4 horas</p>
+                </div>
+                <div class="contact-item">
+                    <div style="font-size: 2em; margin-bottom: 10px;">📧</div>
+                    <h4>Email Soporte</h4>
+                    <p>soporte@kitliderazgo.com</p>
+                    <p style="font-size: 0.9em; opacity: 0.9;">Respuesta en 24 horas</p>
+                </div>
+                <div class="contact-item">
+                    <div style="font-size: 2em; margin-bottom: 10px;">📞</div>
+                    <h4>Sesión 1-a-1</h4>
+                    <p>Días 15 y 30</p>
+                    <p style="font-size: 0.9em; opacity: 0.9;">Incluida en tu plan</p>
+                </div>
+                <div class="contact-item">
+                    <div style="font-size: 2em; margin-bottom: 10px;">👥</div>
+                    <h4>Comunidad Privada</h4>
+                    <p>Grupo LinkedIn</p>
+                    <p style="font-size: 0.9em; opacity: 0.9;">Acceso inmediato</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TESTIMONIAL MOTIVACIONAL -->
+        <div class="testimonial-preview">
+            <div class="testimonial-text">
+                "Los primeros cambios los vi en la primera semana. En 30 días mi evaluación de liderazgo pasó de 3.2 a 4.8. Mi equipo ahora viene a mí con ideas, no solo problemas. Fue la mejor inversión que he hecho en mi carrera."
+            </div>
+            <div class="testimonial-author">- Sandra Malla, Directora de Ventas (Cliente anterior)</div>
+        </div>
+
+        <!-- MENSAJE FINAL -->
+        <div style="background: linear-gradient(45deg, #2c3e50, #34495e); color: white; padding: 40px; border-radius: 20px; text-align: center; margin: 40px 0;">
+            <h2 style="margin-bottom: 20px;">🚀 Tu Transformación Comienza AHORA</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">
+                Tienes todo lo necesario para convertirte en el líder que tu equipo merece. 
+                <strong>En 30 días, tu liderazgo será completamente diferente.</strong>
+            </p>
+            <p style="margin-bottom: 30px;">
+                Recuerda: No es la información lo que cambia vidas, es la IMPLEMENTACIÓN.
+            </p>
+            <a href="evaluacion360.html" class="access-button" style="font-size: 1.2em; padding: 20px 40px;">
+                🎯 COMENZAR MI TRANSFORMACIÓN AHORA
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Función para actualizar progreso
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked');
+            const progress = (checked.length / checkboxes.length) * 100;
+            
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '% Completado';
+            
+            if (progress === 100) {
+                setTimeout(() => {
+                    alert('🎉 ¡FELICITACIONES!\n\nHas completado todos los pasos iniciales. Estás listo para comenzar tu transformación de 30 días.\n\n¡Tu equipo notará la diferencia muy pronto!');
+                }, 500);
+            }
+        }
+
+        // Funciones de descarga simuladas
+        function downloadGuide(type) {
+            alert(`📥 Descargando guía de ${type}...\n\nEn el sistema real, esto descargaría automáticamente el PDF de la guía.`);
+        }
+
+        function generatePDF(type) {
+            alert(`📄 Generando PDF personalizado...\n\nSe está creando tu reporte en formato PDF. Lo recibirás por email en 2-3 minutos.`);
+        }
+
+        function downloadCalendar() {
+            alert(`📅 Agregando a calendario...\n\nSe están creando 30 eventos en tu calendario con las actividades diarias del plan.`);
+        }
+
+        function downloadAllTools() {
+            alert(`📦 Descargando kit completo...\n\nSe está preparando un ZIP con todos los templates, scripts y herramientas.`);
+        }
+
+        function activateWhatsApp() {
+            alert(`📱 Activando coaching por WhatsApp...\n\nEn las próximas 2 horas recibirás tu primer mensaje de bienvenida y la guía del Día 1.`);
+        }
+
+        function scheduleCall() {
+            alert(`📞 Agendando sesión 1-a-1...\n\nTe redirigiremos a Calendly para que elijas tu horario preferido para la primera sesión.`);
+        }
+
+        // Animación automática de progreso al cargar
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('progress-fill').style.width = '10%';
+            }, 1000);
+        });
+
+        // Tracking de analytics
+        console.log('Página post-compra cargada exitosamente');
+        console.log('Cliente activo - Kit de Supervivencia para Líderes');
+        
+        // Simular envío de confirmación
+        setTimeout(() => {
+            console.log('Email de confirmación enviado');
+            console.log('Secuencia de onboarding iniciada');
+        }, 2000);
+    </script>
+</body>
+</html>

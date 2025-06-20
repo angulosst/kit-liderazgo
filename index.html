@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Eres un Jefe Tóxico? | Test Gratuito en 5 Minutos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5em;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3em;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+        
+        .hero .cta-button {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 20px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+        
+        .hero .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(231, 76, 60, 0.4);
+        }
+        
+        .warning-banner {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .warning-banner h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stats h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #e74c3c;
+            display: block;
+        }
+        
+        .stat-text {
+            color: #555;
+            margin-top: 10px;
+        }
+        
+        .benefits {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .benefits h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .benefit-list {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .benefit-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .benefit-list li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+        
+        .test-preview {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .test-preview h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .preview-questions {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .preview-question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .social-proof {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .urgency {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .test-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .options {
+            list-style: none;
+        }
+        
+        .options li {
+            margin-bottom: 10px;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .progress-bar {
+            background: #f0f0f0;
+            height: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .results {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .result-score {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .result-level {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .nivel-verde { background: #d4edda; color: #155724; }
+        .nivel-amarillo { background: #fff3cd; color: #856404; }
+        .nivel-naranja { background: #f8d7da; color: #721c24; }
+        .nivel-rojo { background: #f5c6cb; color: #721c24; }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero .subtitle {
+                font-size: 1.1em;
+            }
+            .hero {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- LANDING PAGE -->
+        <div id="landing-page">
+            <div class="hero">
+                <h1>🚨 ¿Eres un Jefe Tóxico?</h1>
+                <p class="subtitle">Descúbrelo en 5 minutos con este test científico.<br>
+                <strong>85% de los líderes obtienen resultados que los sorprenden.</strong></p>
+                <button class="cta-button" onclick="startTest()">
+                    HACER TEST GRATUITO AHORA
+                </button>
+                <p style="margin-top: 15px; color: #777; font-size: 0.9em;">
+                    ⏱️ Solo 5 minutos • 🔒 100% Confidencial • 📊 Resultados Inmediatos
+                </p>
+            </div>
+
+            <div class="warning-banner">
+                <h3>⚠️ ADVERTENCIA IMPORTANTE</h3>
+                <p>Este test puede revelar verdades incómodas sobre tu estilo de liderazgo. Solo continúa si estás preparado/a para recibir feedback honesto.</p>
+            </div>
+
+            <div class="stats">
+                <h2>🔥 Por qué MILES de líderes ya han tomado este test</h2>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">73%</span>
+                        <div class="stat-text">De los gerentes muestran al menos 3 comportamientos tóxicos</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">89%</span>
+                        <div class="stat-text">De las renuncias son por "mal jefe", no por dinero</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$15,000</span>
+                        <div class="stat-text">Costo promedio de reemplazar un empleado que renuncia</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefits">
+                <h2>✅ Lo que descubrirás en 5 minutos:</h2>
+                <ul class="benefit-list">
+                    <li><strong>Tu nivel exacto de toxicidad</strong> (muchos líderes se sorprenden)</li>
+                    <li><strong>Las 3 áreas más problemáticas</strong> de tu liderazgo</li>
+                    <li><strong>Por qué tu equipo se comporta</strong> como lo hace contigo</li>
+                    <li><strong>Si estás causando rotación</strong> sin darte cuenta</li>
+                    <li><strong>Tu impacto real en la productividad</strong> del equipo</li>
+                    <li><strong>Plan de acción específico</strong> para mejorar inmediatamente</li>
+                </ul>
+            </div>
+
+            <div class="test-preview">
+                <h2>👀 Vista previa del test:</h2>
+                <div class="preview-questions">
+                    <div class="preview-question">
+                        <strong>"¿Con qué frecuencia interrumpes a tu equipo cuando están explicando algo?"</strong>
+                    </div>
+                    <div class="preview-question">
+                        <strong>"Cuando estás bajo presión, ¿cómo tratas a tu equipo?"</strong>
+                    </div>
+                    <div class="preview-question">
+                        <strong>"¿Qué tan seguido renuncian personas de tu equipo?"</strong>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 20px; color: #666;">
+                    + 17 preguntas más que revelarán tu verdadero impacto como líder
+                </p>
+            </div>
+
+            <div class="social-proof">
+                <h2>💬 Lo que dicen otros líderes:</h2>
+                <div class="testimonial">
+                    <div class="testimonial-text">"Me dolió ver mi resultado, pero me abrió los ojos. Ahora entiendo por qué mi equipo actúa distante conmigo."</div>
+                    <div class="testimonial-author">- Carlos M., Gerente de Ventas</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">"Pensé que era un buen jefe, pero el test me mostró 5 comportamientos tóxicos que no sabía que tenía. Invaluable."</div>
+                    <div class="testimonial-author">- María S., Directora de Operaciones</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">"En 5 minutos entendí por qué llevamos 6 meses sin poder retener talento. El problema era yo."</div>
+                    <div class="testimonial-author">- Jorge L., CEO</div>
+                </div>
+            </div>
+
+            <div class="urgency">
+                <h2>⏰ NO esperes más</h2>
+                <p>Cada día que pospongas esto, es otro día donde podrías estar dañando sin saberlo:</p>
+                <ul style="text-align: left; max-width: 400px; margin: 20px auto;">
+                    <li>❌ La motivación de tu equipo</li>
+                    <li>❌ La productividad de la empresa</li>
+                    <li>❌ Tu reputación como líder</li>
+                    <li>❌ El clima laboral</li>
+                </ul>
+                <button class="cta-button" onclick="startTest()" style="margin-top: 20px;">
+                    TOMAR EL TEST AHORA - GRATIS
+                </button>
+            </div>
+        </div>
+
+        <!-- TEST SECTION -->
+        <div id="test-section" class="hidden">
+            <div class="test-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                
+                <div id="question-container">
+                    <!-- Questions will be loaded here -->
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button id="prev-btn" onclick="previousQuestion()" class="cta-button" style="margin-right: 10px; display: none;">
+                        ← Anterior
+                    </button>
+                    <button id="next-btn" onclick="nextQuestion()" class="cta-button">
+                        Siguiente →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMAIL CAPTURE BEFORE RESULTS -->
+        <div id="email-capture-section" class="hidden">
+            <div class="test-container">
+                <div style="text-align: center; padding: 40px;">
+                    <h2>🎉 ¡Test Completado!</h2>
+                    <p style="font-size: 1.2em; margin: 20px 0; color: #555;">
+                        Tus resultados están listos. Ingresa tu email para ver tu análisis personalizado
+                        y recibir tu plan de acción gratuito.
+                    </p>
+                    
+                    <div style="background: linear-gradient(45deg, #27ae60, #2ecc71); color: white; padding: 30px; border-radius: 15px; margin: 30px 0;">
+                        <h3 style="margin-bottom: 20px;">📧 Recibe tu análisis completo</h3>
+                        <form onsubmit="showResults(event)" style="max-width: 400px; margin: 0 auto;">
+                            <div style="margin-bottom: 15px;">
+                                <input 
+                                    type="text" 
+                                    id="result-name" 
+                                    placeholder="Tu nombre"
+                                    style="width: 100%; padding: 15px; border: none; border-radius: 25px; font-size: 16px;"
+                                    required
+                                >
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <input 
+                                    type="email" 
+                                    id="result-email" 
+                                    placeholder="tu.email@empresa.com"
+                                    style="width: 100%; padding: 15px; border: none; border-radius: 25px; font-size: 16px;"
+                                    required
+                                >
+                            </div>
+                            <button type="submit" class="cta-button" style="width: 100%; margin-top: 10px;">
+                                📊 VER MIS RESULTADOS AHORA
+                            </button>
+                        </form>
+                        
+                        <div style="margin-top: 20px; font-size: 0.9em; opacity: 0.9;">
+                            🔒 100% confidencial • ❌ Sin spam • 📊 Resultados inmediatos
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; color: #555;">
+                        <h4>Lo que recibirás:</h4>
+                        <ul style="text-align: left; max-width: 400px; margin: 15px auto; line-height: 2;">
+                            <li>✅ Tu puntuación detallada de liderazgo</li>
+                            <li>✅ Análisis de tus 3 áreas más críticas</li>
+                            <li>✅ Plan de acción personalizado</li>
+                            <li>✅ Comparación con otros líderes</li>
+                            <li>✅ Email con recursos adicionales</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS SECTION -->
+        <div id="results-section" class="hidden">
+            <div class="test-container">
+                <div class="results">
+                    <h2>📊 TUS RESULTADOS</h2>
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 10px; margin-bottom: 25px; text-align: center;">
+                        <p style="color: #27ae60; font-weight: bold;">✅ Resultados enviados a tu email: <span id="user-email-display"></span></p>
+                    </div>
+                    
+                    <div class="result-score" id="final-score"></div>
+                    <div class="result-level" id="result-level"></div>
+                    <div id="result-description"></div>
+                    
+                    <div style="margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 15px;">
+                        <h3 style="color: #e74c3c; margin-bottom: 20px;">🚀 ¿Quieres la transformación completa?</h3>
+                        <p style="margin-bottom: 20px;">Este test te da una vista general. Para una transformación real necesitas:</p>
+                        <ul style="text-align: left; max-width: 400px; margin: 0 auto 20px;">
+                            <li>✅ Evaluación 360° de tu equipo</li>
+                            <li>✅ Plan personalizado de mejora</li>
+                            <li>✅ Coaching individual especializado</li>
+                            <li>✅ Seguimiento y métricas de progreso</li>
+                        </ul>
+                        <button class="cta-button" onclick="showUpgrade()">
+                            VER PROGRAMA COMPLETO - $97
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Nhora Felipa Angulo - Experta en Liderazgo y SST</p>
+        <p>Transformando líderes, salvando vidas laborales</p>
+    </div>
+
+    <script>
+        // Test questions data
+        const questions = [
+            {
+                question: "Cuando un empleado comete un error...",
+                options: [
+                    { text: "Lo corrijo en privado y explico cómo mejorar", score: 0 },
+                    { text: "Lo menciono discretamente frente a otros", score: 1 },
+                    { text: "Lo señalo inmediatamente, sin importar quién esté presente", score: 2 },
+                    { text: "Hago comentarios sarcásticos o lo ridiculizo públicamente", score: 3 }
+                ]
+            },
+            {
+                question: "¿Con qué frecuencia interrumpes a tu equipo cuando están explicando algo?",
+                options: [
+                    { text: "Casi nunca, los dejo terminar sus ideas", score: 0 },
+                    { text: "Solo cuando es urgente", score: 1 },
+                    { text: "Frecuentemente, para acelerar la conversación", score: 2 },
+                    { text: "Constantemente, ya sé lo que van a decir", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando das feedback negativo, tu tono es:",
+                options: [
+                    { text: "Constructivo y enfocado en el trabajo", score: 0 },
+                    { text: "Directo pero respetuoso", score: 1 },
+                    { text: "Firme y a veces áspero", score: 2 },
+                    { text: "Crítico hacia la persona, no solo el trabajo", score: 3 }
+                ]
+            },
+            {
+                question: "¿Cómo reaccionas cuando alguien te da feedback sobre tu liderazgo?",
+                options: [
+                    { text: "Lo agradezco y reflexiono sobre ello", score: 0 },
+                    { text: "Escucho, aunque a veces me molesta", score: 1 },
+                    { text: "Me pongo a la defensiva y explico mis razones", score: 2 },
+                    { text: "Me enojo y les recuerdo quién es el jefe", score: 3 }
+                ]
+            },
+            {
+                question: "¿Qué tan seguido revisas el trabajo de tu equipo?",
+                options: [
+                    { text: "Solo en fechas establecidas o cuando me lo piden", score: 0 },
+                    { text: "Semanalmente para dar apoyo", score: 1 },
+                    { text: "Diariamente para asegurarme que van bien", score: 2 },
+                    { text: "Constantemente, necesito saber qué hacen cada hora", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando delegas una tarea importante:",
+                options: [
+                    { text: "Explico el resultado esperado y los dejo trabajar", score: 0 },
+                    { text: "Doy algunas pautas y hago seguimiento regular", score: 1 },
+                    { text: "Especifico exactamente cómo hacerlo paso a paso", score: 2 },
+                    { text: "Termino haciéndolo yo porque es más rápido", score: 3 }
+                ]
+            },
+            {
+                question: "¿Qué tan cómodo te sientes cuando no sabes exactamente qué está haciendo tu equipo?",
+                options: [
+                    { text: "Muy cómodo, confío en ellos", score: 0 },
+                    { text: "Relativamente cómodo si hay comunicación regular", score: 1 },
+                    { text: "Incómodo, prefiero estar al tanto", score: 2 },
+                    { text: "Muy ansioso, necesito control total", score: 3 }
+                ]
+            },
+            {
+                question: "Tu estado de ánimo en el trabajo es:",
+                options: [
+                    { text: "Generalmente estable y predecible", score: 0 },
+                    { text: "Varía pero mantengo la compostura", score: 1 },
+                    { text: "Cambia según el estrés del día", score: 2 },
+                    { text: "Impredecible, depende de muchas cosas", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando estás bajo presión, ¿cómo tratas a tu equipo?",
+                options: [
+                    { text: "Igual que siempre, trato de protegerlos del estrés", score: 0 },
+                    { text: "Soy más directo pero sigo siendo respetuoso", score: 1 },
+                    { text: "Soy más exigente y menos paciente", score: 2 },
+                    { text: "Descargo mi estrés con ellos", score: 3 }
+                ]
+            },
+            {
+                question: "¿Con qué frecuencia alzas la voz o usas un tono agresivo?",
+                options: [
+                    { text: "Nunca o casi nunca", score: 0 },
+                    { text: "Solo en situaciones muy excepcionales", score: 1 },
+                    { text: "Cuando la situación lo amerita", score: 2 },
+                    { text: "Es mi forma normal de comunicarme cuando estoy serio", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando tu equipo logra un éxito, ¿cómo comunicas el logro a tus superiores?",
+                options: [
+                    { text: "Destaco específicamente quién hizo qué", score: 0 },
+                    { text: "Menciono que fue un esfuerzo de equipo", score: 1 },
+                    { text: "Hablo del resultado pero no siempre menciono nombres", score: 2 },
+                    { text: "Enfatizo mi rol en la coordinación del proyecto", score: 3 }
+                ]
+            },
+            {
+                question: "¿Tienes empleados favoritos?",
+                options: [
+                    { text: "Trato a todos por igual según su desempeño", score: 0 },
+                    { text: "Trabajo mejor con algunos, pero soy justo con todos", score: 1 },
+                    { text: "Sí tengo preferencias, pero trato de ser objetivo", score: 2 },
+                    { text: "Claro, algunos son claramente mejores que otros", score: 3 }
+                ]
+            },
+            {
+                question: "¿Cómo distribuyes las oportunidades de crecimiento?",
+                options: [
+                    { text: "Según mérito y potencial de cada persona", score: 0 },
+                    { text: "Trato de rotar para que todos tengan oportunidades", score: 1 },
+                    { text: "Se las doy a quienes mejor trabajan conmigo", score: 2 },
+                    { text: "A mis empleados de confianza", score: 3 }
+                ]
+            },
+            {
+                question: "¿Contactas a tu equipo fuera del horario laboral?",
+                options: [
+                    { text: "Solo en emergencias reales", score: 0 },
+                    { text: "Ocasionalmente para cosas importantes", score: 1 },
+                    { text: "Regularmente cuando necesito algo", score: 2 },
+                    { text: "Cuando se me ocurre algo, sin importar la hora", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando alguien solicita tiempo libre o vacaciones:",
+                options: [
+                    { text: "Respeto su derecho y planifico cobertura", score: 0 },
+                    { text: "Lo considero según las necesidades del equipo", score: 1 },
+                    { text: "Hago comentarios sobre el timing o la cantidad", score: 2 },
+                    { text: "Los hago sentir culpables o cuestiono su compromiso", score: 3 }
+                ]
+            },
+            {
+                question: "¿Haces comentarios sobre la vida personal de tus empleados?",
+                options: [
+                    { text: "Solo cuando ellos comparten y es apropiado", score: 0 },
+                    { text: "Pregunto por cortesía sobre temas generales", score: 1 },
+                    { text: "A veces comento sobre sus decisiones personales", score: 2 },
+                    { text: "Opino sobre cómo deberían manejar su vida personal", score: 3 }
+                ]
+            },
+            {
+                question: "¿Qué tan seguido renuncian personas de tu equipo?",
+                options: [
+                    { text: "Rara vez, la mayoría se queda varios años", score: 0 },
+                    { text: "Normal, según las oportunidades del mercado", score: 1 },
+                    { text: "Más de lo que me gustaría", score: 2 },
+                    { text: "Frecuentemente, pero es porque no estaban comprometidos", score: 3 }
+                ]
+            },
+            {
+                question: "Cuando alguien renuncia, ¿cuál es la razón más común que dan?",
+                options: [
+                    { text: "Mejor oportunidad externa o crecimiento personal", score: 0 },
+                    { text: "Cambio de carrera o razones familiares", score: 1 },
+                    { text: "Buscan 'mejor ambiente laboral'", score: 2 },
+                    { text: "No dan razones claras o se van abruptamente", score: 3 }
+                ]
+            },
+            {
+                question: "¿Cómo describirías el ambiente cuando entras a una reunión?",
+                options: [
+                    { text: "Relajado y colaborativo", score: 0 },
+                    { text: "Profesional y enfocado", score: 1 },
+                    { text: "Tenso pero productivo", score: 2 },
+                    { text: "Silencioso y cauteloso", score: 3 }
+                ]
+            },
+            {
+                question: "Si le preguntaras anónimamente a tu equipo qué cambiarían de ti como jefe, crees que dirían:",
+                options: [
+                    { text: "Cosas menores de proceso o comunicación", score: 0 },
+                    { text: "Que esté más disponible o dé más feedback", score: 1 },
+                    { text: "Que sea menos exigente o más flexible", score: 2 },
+                    { text: "Que cambie completamente mi estilo de liderazgo", score: 3 }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+        let totalScore = 0;
+
+        function startTest() {
+            document.getElementById('landing-page').classList.add('hidden');
+            document.getElementById('test-section').classList.remove('hidden');
+            showQuestion(0);
+        }
+
+        function showQuestion(index) {
+            const question = questions[index];
+            const container = document.getElementById('question-container');
+            
+            container.innerHTML = `
+                <div class="question">
+                    <h3>Pregunta ${index + 1} de ${questions.length}</h3>
+                    <h3>${question.question}</h3>
+                    <ul class="options">
+                        ${question.options.map((option, i) => `
+                            <li>
+                                <label>
+                                    <input type="radio" name="q${index}" value="${option.score}" onchange="selectAnswer(${index}, ${option.score})">
+                                    ${option.text}
+                                </label>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+
+            // Update progress bar
+            const progress = ((index + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+
+            // Show/hide navigation buttons
+            document.getElementById('prev-btn').style.display = index > 0 ? 'inline-block' : 'none';
+            document.getElementById('next-btn').textContent = index === questions.length - 1 ? 'Ver Resultados' : 'Siguiente →';
+        }
+
+        function selectAnswer(questionIndex, score) {
+            answers[questionIndex] = score;
+        }
+
+        function nextQuestion() {
+            if (answers[currentQuestion] === undefined) {
+                alert('Por favor selecciona una respuesta antes de continuar.');
+                return;
+            }
+
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        function showResults() {
+            totalScore = answers.reduce((sum, score) => sum + score, 0);
+            
+            document.getElementById('test-section').classList.add('hidden');
+            document.getElementById('results-section').classList.remove('hidden');
+            
+            const scoreElement = document.getElementById('final-score');
+            const levelElement = document.getElementById('result-level');
+            const descriptionElement = document.getElementById('result-description');
+            
+            scoreElement.textContent = totalScore + ' puntos';
+            
+            let level, levelClass, description, recommendations;
+            
+            if (totalScore <= 15) {
+                level = "🟢 LÍDER SALUDABLE";
+                levelClass = "nivel-verde";
+                description = "¡Excelente! Tienes un estilo de liderazgo saludable y empático. Tu equipo probablemente te respeta y se siente valorado.";
+                recommendations = [
+                    "Mantén estas buenas prácticas",
+                    "Busca feedback regular para seguir mejorando",
+                    "Considera mentorear a otros líderes",
+                    "Documenta tus mejores prácticas para compartir"
+                ];
+            } else if (totalScore <= 30) {
+                level = "🟡 SEÑALES DE ALERTA";
+                levelClass = "nivel-amarillo";
+                description = "Hay algunas áreas donde puedes estar desarrollando patrones problemáticos. Es momento de reflexionar y hacer ajustes antes de que se conviertan en problemas mayores.";
+                recommendations = [
+                    "Solicita feedback específico de tu equipo",
+                    "Identifica tus 3 comportamientos más problemáticos",
+                    "Implementa un sistema de autoevaluación semanal",
+                    "Considera coaching o capacitación en liderazgo"
+                ];
+            } else if (totalScore <= 45) {
+                level = "🟠 LIDERAZGO PROBLEMÁTICO";
+                levelClass = "nivel-naranja";
+                description = "Tu estilo de liderazgo está afectando negativamente a tu equipo. Es urgente trabajar en estos patrones antes de que dañen más la productividad y retención.";
+                recommendations = [
+                    "Busca ayuda profesional inmediatamente",
+                    "Realiza una evaluación 360° con tu equipo",
+                    "Implementa un plan de mejora de 90 días",
+                    "Considera disculparte con tu equipo por comportamientos pasados"
+                ];
+            } else {
+                level = "🔴 LIDERAZGO TÓXICO";
+                levelClass = "nivel-rojo";
+                description = "Tu estilo de liderazgo está causando daño real a tu equipo y organización. Necesitas intervención profesional inmediata para transformar tu enfoque.";
+                recommendations = [
+                    "Intervención profesional URGENTE",
+                    "Evaluación psicológica organizacional",
+                    "Plan de transformación intensivo",
+                    "Posible reubicación temporal mientras mejoras"
+                ];
+            }
+            
+            levelElement.textContent = level;
+            levelElement.className = 'result-level ' + levelClass;
+            
+            descriptionElement.innerHTML = `
+                <div style="margin-bottom: 30px;">
+                    <p style="font-size: 1.1em; margin-bottom: 20px;">${description}</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                    <h4 style="color: #e74c3c; margin-bottom: 15px;">📋 RECOMENDACIONES INMEDIATAS:</h4>
+                    <ul style="text-align: left; max-width: 500px; margin: 0 auto;">
+                        ${recommendations.map(rec => `<li style="margin-bottom: 8px;">${rec}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 25px; border-radius: 15px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 15px;">💡 ¿Sabías que...</h4>
+                    <p style="margin-bottom: 10px;">• Un líder tóxico puede reducir la productividad del equipo hasta en un 40%</p>
+                    <p style="margin-bottom: 10px;">• El costo de reemplazar un empleado que renuncia por mal liderazgo es de $15,000 - $75,000</p>
+                    <p>• Los equipos con líderes empáticos son 50% más productivos y creativos</p>
+                </div>
+            `;
+            
+            // Track the result for analytics
+            console.log('Test completed. Score:', totalScore, 'Level:', level);
+        }
+
+        function showUpgrade() {
+            alert('Funcionalidad de upgrade próximamente. Por ahora, contacta directamente para más información.');
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Test de Liderazgo Tóxico cargado correctamente');
+        });
+    </script>
+</body>
+</html>
